@@ -16,9 +16,17 @@ public class Main {
         System.out.println("user 2 mail: ");
         mail2 = read.next();
 
-
-
         /*
+        RunMenu test = new RunMenu();
+        test.runMenu();
+
+        funciona y corre el menu
+        */
+
+        /* esto es una prueba de ingresar usuario y leerlo*/
+
+
+        /*NINGUN MENU
          * no hace un cls en la terminal
          * no hace un pause en la terminal
          * no tiene ninguna funcion incluida
