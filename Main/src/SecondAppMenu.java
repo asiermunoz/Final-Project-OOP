@@ -52,7 +52,7 @@ public class SecondAppMenu {
                     } else {
                         for (int i = 0; i < listOfPlayers.size(); i++) {
                             System.out.println(i + ". " + listOfPlayers.get(i).getName() + "(" + listOfPlayers.get(i).getPlayerAlias() + ") " + listOfPlayers.get(i).getEmail());
-                        }
+                        };
                     }
                     break;
                 case 3:
