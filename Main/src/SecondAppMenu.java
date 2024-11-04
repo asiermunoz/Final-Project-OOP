@@ -60,7 +60,7 @@ public class SecondAppMenu {
                     System.out.println("Enter the player's number: ");
                     int playerPosition = searchPlayerScanner.nextInt();
 
-                    if (playerPosition < 0 || searchPlayerScanner.nextInt() > listOfPlayers.size()) {
+                    if (playerPosition < 0 || playerPosition > listOfPlayers.size()) {
                         System.out.println("No player has been found in that position");
                     } else {
                         listOfPlayers.get(playerPosition).printPlayerStats();
