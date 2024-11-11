@@ -1,6 +1,5 @@
 import com.ucab.objects.*;
 import org.w3c.dom.ls.LSOutput;
-import ucab.edu.ve.Player;
 
 import java.util.LinkedList;
 import java.util.Scanner;
