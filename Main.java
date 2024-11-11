@@ -1,5 +1,7 @@
-import ucab.edu.objects.User;
+import ucab.edu.objects.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +21,11 @@ public class Main {
         System.out.println("4. Mostrar estadística de jugadores.");
         System.out.println("0. Salir.");
         return scanner.nextInt();
+    }
+
+    private static boolean setFirst(){
+        Random randomChoice = new Random();
+        return randomChoice.nextBoolean();
     }
 
     private static String logIn(){
@@ -56,6 +63,27 @@ public class Main {
             option = menu();
             switch(option){
                 case 1:
+                    //new Game
+                    Board board = new Board();
+                    Bag bag = new Bag();
+                    bag.fillNewBag();
+
+                    System.out.println("Iniciando nuevo juego: \n");
+                    Player player1 = new Player(user1.getEmail(), user1.getAlias(), 0, 7, bag, false);
+                    Player player2 = new Player(user2.getEmail(), user2.getAlias(), 0, 7, bag, false);
+                    ArrayList<Player> players = new ArrayList<>();
+
+                    //Establecer orden de jugadores
+                    if(setFirst()){
+                        players.add(player1);
+                        players.add(player2);
+                        System.out.println("Inicia "+ player1.getAlias());
+                    }
+                    else{
+                        players.add(player2);
+                        players.add(player1);
+                        System.out.println("Inicia "+ player2.getAlias());
+                    }
                     break;
                 case 2:
                     break;
