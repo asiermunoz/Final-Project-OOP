@@ -7,12 +7,9 @@ public class Bag {
     private int total;
     private ArrayList<Letter> letters = new ArrayList<>();
 
-    public int getTotal() {
-        return total;
-    }
 
     //Rellenar bolsa inicial
-    public void fillNewBag(){
+    public Bag(){
         total = 100;
         Letter letter;
         letter = new Letter("A",1);
@@ -99,12 +96,32 @@ public class Bag {
         letter = new Letter("Z",10);
         letters.add(letter);
 
-        letter = new Letter("Comodín",0);
+        letter = new Letter("☻",0);
         for(int i = 0; i<=1; i++) { letters.add(letter); }
     }
 
+
+    public ArrayList <Letter> fillNewHolder(int lettersNeeded){
+        ArrayList <Letter> letters = new ArrayList<>();
+        for(int i = 0; i < lettersNeeded; i++){
+            if(total!=0){
+                letters.add(takeRandomLetter());
+            }
+            else{
+                System.out.println("Bolsa vacía.");
+                break;
+            }
+        }
+        return letters;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+
     //Sacar letra al azar
-    public Letter takeRandomLetter(){
+    private Letter takeRandomLetter(){
         int i = (int)Math.floor(Math.random()*this.total);
         Letter letter = letters.get(i);
         letters.remove(i);

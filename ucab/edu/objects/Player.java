@@ -2,24 +2,29 @@ package ucab.edu.objects;
 
 import java.util.ArrayList;
 
-public class Player extends User {
+public class Player extends User{
+    private String alias;
     private int score;
     private int lettersAvailable;
     private ArrayList <Letter> holder = new ArrayList<>();
     private boolean winner;
 
-    public Player(String email, String alias, int score, int lettersAvailable, Bag bag, boolean winner) {
-        super(email,alias);
+    public Player(String alias, String email, int score, int lettersAvailable, ArrayList<Letter> holder, boolean winner) {
+        super(alias,email);
+        this.alias = alias;
         this.score = score;
         this.lettersAvailable = lettersAvailable;
-        putInHolder(lettersAvailable,bag);
+        this.holder = holder;
         this.winner = winner;
     }
 
-    private void putInHolder(int lettersAvailable, Bag bag){
-        for(int i = 0; i < lettersAvailable; i++){
-            this.holder.add(bag.takeRandomLetter());
-        }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public int getScore() {
@@ -54,5 +59,12 @@ public class Player extends User {
         this.winner = winner;
     }
 
+    public void seeHolder(){
+        for(Letter letter:holder){
+            System.out.printf("%3s",letter.getLetter());
+            System.out.printf("|%s",letter.getValue());
+        }
+        System.out.println();
+    }
 
 }

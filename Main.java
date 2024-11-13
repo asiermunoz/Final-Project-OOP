@@ -10,6 +10,19 @@ import static ucab.edu.objects.Color.*;
 import static ucab.edu.objects.User.*;
 
 public class Main {
+
+    private static Order newOrder(Player player1, Player player2){
+        FirstOne first;
+        Random randomChoice = new Random();
+        if(randomChoice.nextBoolean()){
+            first = new FirstPlayer1();
+        }
+        else{
+            first = new FirstPlayer2();
+        }
+        return first.setFirst(player1,player2);
+    }
+
     //Menú principal.
     private static int menu(){
         Scanner scanner = new Scanner(System.in);
@@ -64,26 +77,35 @@ public class Main {
             switch(option){
                 case 1:
                     //new Game
-                    Board board = new Board();
+                    String[][] table = new String [15][15];
+                    Board board = new Board(table);
+                    board.emptyTable();
                     Bag bag = new Bag();
-                    bag.fillNewBag();
+                    Order order;
 
                     System.out.println("Iniciando nuevo juego: \n");
-                    Player player1 = new Player(user1.getEmail(), user1.getAlias(), 0, 7, bag, false);
-                    Player player2 = new Player(user2.getEmail(), user2.getAlias(), 0, 7, bag, false);
-                    ArrayList<Player> players = new ArrayList<>();
-
+                    Player player1 = new Player(user1.getAlias(),user1.getEmail(),0,
+                            7,bag.fillNewHolder(7), false);
+                    Player player2 = new Player(user2.getAlias(),user2.getEmail(),0,
+                            7,bag.fillNewHolder(7), false);
                     //Establecer orden de jugadores
-                    if(setFirst()){
-                        players.add(player1);
-                        players.add(player2);
-                        System.out.println("Inicia "+ player1.getAlias());
-                    }
-                    else{
-                        players.add(player2);
-                        players.add(player1);
-                        System.out.println("Inicia "+ player2.getAlias());
-                    }
+                    order = newOrder(player1,player2);
+//                  do {
+                        for (Player turn : order.getPlayers()) {
+                            System.out.println("Es el turno de: " + turn.getAlias());
+                            Thread.sleep(800);
+                            System.out.printf("%3s"," ");
+                            for(int i = 1; i<=15; i++){
+                                System.out.printf("%3s",i);
+                                System.out.printf("%s"," ");
+                            }
+                            System.out.println();
+                            board.printTable();
+                            Thread.sleep(800);
+                            System.out.println("Letras que posee " + turn.getAlias() + ":"); turn.seeHolder();
+                        }
+//                  }while(!player1.isWinner() && !player2.isWinner());
+
                     break;
                 case 2:
                     break;
@@ -101,6 +123,6 @@ public class Main {
                     Thread.sleep(500); //Pausa la corrida de código por los milisegundos establecidos.
                     break;
             }
-        }while(option != 4);
+        }while(option != 0);
     }
 }

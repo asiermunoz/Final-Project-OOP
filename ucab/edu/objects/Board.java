@@ -1,31 +1,37 @@
 package ucab.edu.objects;
 
 public class Board {
-    private Box[][] table = new Box[15][15];
+    private String[][] table = new String[15][15];
 
-    public Board() {
-        Letter letter = new Letter(" ", 0);
-        for (int i = 0; i < 15; i++){
-            for (int j = 0; j < 15; j++){
-                this.table[i][j] = new Box(null,i,j);
-            }
-        }
+    public Board(String[][] table) {
+        this.table = table;
     }
 
     public void printTable(){
         for (int i = 0; i < 15; i++){
+            System.out.printf("%2s",i+1);
+            System.out.printf("%s"," ");
             for (int j = 0; j < 15; j++){
-                System.out.printf("|%5s",table[i][j].getLetter());
+                System.out.printf("|%2s",table[i][j]);
+                System.out.printf("%s"," ");
             }
             System.out.printf("|%n");
         }
     }
 
-    public Box[][] getTable() {
+    public void emptyTable() {
+        for (int i = 0; i < table.length; i++){
+            for (int j = 0; j < table.length; j++){
+                table[i][j]=" ";
+            }
+        }
+    }
+
+    public String[][] getTable() {
         return table;
     }
 
-    public void setTable(Box[][] table) {
+    public void setTable(String[][] table) {
         this.table = table;
     }
 }
