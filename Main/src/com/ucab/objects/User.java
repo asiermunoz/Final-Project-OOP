@@ -1,5 +1,7 @@
 package com.ucab.objects;
 
+import com.ucab.objects.exceptions.InvalidAliasException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,10 +30,9 @@ public class User {
         this.email = email;
     }
 
-    public boolean validateAlias(){
-        if (this.alias == "") {
-            return false;
+    public void validateAlias() throws InvalidAliasException {
+        if (this.alias == null || this.alias.isEmpty()) {
+            throw new InvalidAliasException();
         }
-        return true;
     }
 }

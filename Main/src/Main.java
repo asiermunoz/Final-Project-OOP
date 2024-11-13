@@ -1,6 +1,5 @@
 import com.ucab.objects.*;
-import org.w3c.dom.ls.LSOutput;
-
+import com.ucab.objects.exceptions.*;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -10,45 +9,72 @@ public class Main {
         int opc;
         User user1, user2;
         Email email1, email2;
+        LinkedList<User> listUsersToAdd = new LinkedList<User>();
 
         //RUN menu
-        System.out.println("\t\t MENU LOGIN USERS: \n");
+        System.out.println("\t\t LOGIN MENU USERS: \n");
 
         //User 1.
-        do{
+        //ENTER EMAIL
+        while (true) {
             System.out.println("User 1 email: ");
             email1 = new Email(read.nextLine());
-            if(!email1.validateEmail()){
-                System.out.println("Email no valido.");
-                System.out.println("Ingrese de nuevo su email.");
+            try {
+                email1.validateEmail();
+                break;
+            } catch (InvalidEmailException ex) {
+                ex.messageInvalidEmailException();
             }
-        }while(!email1.validateEmail());
-        do{
+        }
+
+        //ENTER ALIAS
+        while (true) {
             System.out.println("User 1 alias: ");
             user1 = new User(read.nextLine(), email1);
-            if(!user1.validateAlias()){
-                System.out.println("Alias ingresado no disponible.");
-                System.out.println("Ingrese un nuevo alias.");
+            try {
+                user1.validateAlias();
+                break;
+            } catch (InvalidAliasException ex) {
+                ex.messageInvalidAliasException();
             }
-        }while(!user1.validateAlias());
+        }
+
+        //ADD TO LIST
+        listUsersToAdd.add(user1);
 
         //User 2.
-        do{
+        //ENTER EMAIL
+        while (true) {
             System.out.println("User 2 email: ");
             email2 = new Email(read.nextLine());
-            if(!email2.validateEmail()){
-                System.out.println("Email no valido.");
-                System.out.println("Ingrese de nuevo su email.");
+            try {
+                email2.validateEmail();
+                break;
+            } catch (InvalidEmailException ex) {
+                ex.messageInvalidEmailException();
             }
-        }while(!email2.validateEmail());
-        do{
+        }
+
+        //ENTER ALIAS
+        while (true) {
             System.out.println("User 2 alias: ");
             user2 = new User(read.nextLine(), email2);
-            if(!user2.validateAlias()){
-                System.out.println("Alias ingresado no disponible.");
-                System.out.println("Ingrese un nuevo alias.");
+            try {
+                user2.validateAlias();
+                break;
+            } catch (InvalidAliasException ex) {
+                ex.messageInvalidAliasException();
             }
-        }while(!user2.validateAlias());
+        }
+
+        //ADD TO LIST
+        listUsersToAdd.add(user2);
+
+        //MANAGING JSON
+
+        JsonHandler.writeToJson(listUsersToAdd);
+
+        LinkedList<User> listOfUsers = JsonHandler.readFromJson();
 
         do{
             Scanner select = new Scanner(System.in);

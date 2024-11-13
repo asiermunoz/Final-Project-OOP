@@ -1,4 +1,6 @@
 package com.ucab.objects;
+import com.ucab.objects.exceptions.InvalidEmailException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,10 +19,12 @@ public class Email {
         this.email = email;
     }
 
-    public boolean validateEmail() {
-        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+    public void validateEmail() throws InvalidEmailException {
+        Pattern pattern = Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
         Matcher matcher = pattern.matcher(this.email);
-        return matcher.matches();
+        if(! matcher.matches()){
+            throw new InvalidEmailException();
+        }
     }
 
 }

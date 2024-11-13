@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="jdk" jdkName="openjdk-23" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Final-Project-OOP" />
+    <orderEntry type="library" name="google.code.gson" level="application" />
   </component>
 </module>
