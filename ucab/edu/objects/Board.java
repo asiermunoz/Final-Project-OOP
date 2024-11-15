@@ -8,6 +8,12 @@ public class Board {
     }
 
     public void printTable(){
+        System.out.printf("%3s"," ");
+        for(int i = 1; i<=15; i++){
+            System.out.printf("%3s",i);
+            System.out.printf("%s"," ");
+        }
+        System.out.println();
         for (int i = 0; i < 15; i++){
             System.out.printf("%2s",i+1);
             System.out.printf("%s"," ");
