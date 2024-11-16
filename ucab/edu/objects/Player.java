@@ -6,25 +6,15 @@ public class Player extends User{
     private String alias;
     private int score;
     private int lettersAvailable;
-    private ArrayList <Letter> holder = new ArrayList<>();
+    private Holder holder;
     private boolean winner;
 
-    public Player(String alias, String email, int score, int lettersAvailable, ArrayList<Letter> holder, boolean winner) {
-        super(alias,email);
-        this.alias = alias;
+    public Player(String email, String alias, int score, int lettersAvailable, Holder holder, boolean winner) {
+        super(email, alias);
         this.score = score;
         this.lettersAvailable = lettersAvailable;
         this.holder = holder;
         this.winner = winner;
-    }
-
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
     }
 
     public int getScore() {
@@ -43,13 +33,9 @@ public class Player extends User{
         this.lettersAvailable = lettersAvailable;
     }
 
-    public ArrayList<Letter> getHolder() {
-        return holder;
-    }
+    public Holder getHolder() { return holder; }
 
-    public void setHolder(ArrayList<Letter> holder) {
-        this.holder = holder;
-    }
+    public void setHolder(Holder holder) { this.holder = holder; }
 
     public boolean isWinner() {
         return winner;
@@ -59,12 +45,5 @@ public class Player extends User{
         this.winner = winner;
     }
 
-    public void seeHolder(){
-        for(Letter letter:holder){
-            System.out.printf("%3s",letter.getLetter());
-            System.out.printf("|%s",letter.getValue());
-        }
-        System.out.println();
-    }
 
 }
