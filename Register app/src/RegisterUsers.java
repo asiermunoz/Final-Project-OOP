@@ -21,19 +21,33 @@ public class RegisterUsers{
         User user = null;
         Email email = null;
         LinkedList<User> listOfUsers = new LinkedList<User>();
+        int index;
 
         do{
             listOfUsers = JsonHandler.readFromJson();
             Scanner select = new Scanner(System.in);
             System.out.println("\t\t MENU JSON FILE: \n");
-            System.out.println("Ingrese la opcion que desea realizar.");
             System.out.println("1. Register User");
             System.out.println("2. Modify Name");
             System.out.println("3. Modify Email");
-            System.out.println("4. Show File");
-            System.out.println("5. Delete User");
-            System.out.println("0. Salir.");
+            System.out.println("4. Delete User");
+            System.out.println("0. Salir.\n");
+
+            //LISTA DE USUARIOS REGISTRADOS
+            int i = 0;
+            if(listOfUsers == null) {
+                listOfUsers = new LinkedList<User>();
+                System.out.println("LINKED LIST IS EMPTY.");
+            }
+            for (User user1 : listOfUsers) {
+                System.out.println(i + ". " + "alias: " + user1.getAlias() + ", email: " + user1.getStringEmail());
+                i++;
+            }
+
+            //INSERTAR OPCION
+            System.out.println("\n Ingrese la opcion que desea realizar: ");
             opc = select.nextInt();
+
 
             switch(opc){
                 case 0:
@@ -69,36 +83,31 @@ public class RegisterUsers{
                     }
                     listOfUsers.add(user);
                     JsonHandler.writeToJson(listOfUsers);
-
                     break;
 
                 case 2:
+                    System.out.println("Index of User to Modify: ");
+                    index = read.nextInt();
+                    System.out.println("Type the new Name: ");
+                    String name = read.next();
+
+                    listOfUsers.get(index).setAlias(name);
+                    JsonHandler.writeToJson(listOfUsers);
                     break;
                 case 3:
+                    System.out.println("Index of User to Modify: ");
+                    index = read.nextInt();
+                    System.out.println("Type the new email: ");
+                    String mail = read.next();
+                    Email emailToModify = new Email(mail);
+
+                    listOfUsers.get(index).setEmail(emailToModify);
+                    JsonHandler.writeToJson(listOfUsers);
                     break;
 
                 case 4:
-                    if(listOfUsers == null) {
-                        listOfUsers = new LinkedList<User>();
-                        System.out.println("LINKED LIST IS EMPTY.");
-                    }
-                    for (User user1 : listOfUsers) {
-                        System.out.println("alias: " + user1.getAlias() + ", email: " + user1.getStringEmail());
-                    }
-
-                    break;
-                case 5:
-                    int i = 0;
-                    if(listOfUsers == null) {
-                        listOfUsers = new LinkedList<User>();
-                        System.out.println("LINKED LIST IS EMPTY.");
-                    }
-                    for (User user1 : listOfUsers) {
-                        System.out.println(i + ". " + "alias: " + user1.getAlias() + ", email: " + user1.getStringEmail());
-                        i++;
-                    }
                     System.out.println("\n Write the index of the user to delete: ");
-                    int index = read.nextInt();
+                    index = read.nextInt();
                     listOfUsers.remove(index);
                     JsonHandler.writeToJson(listOfUsers);
                     break;
