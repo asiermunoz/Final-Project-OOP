@@ -1,4 +1,4 @@
-package com.ucab.objects.exceptions;
+package project.users.exceptions;
 
 public class InvalidAliasException extends RuntimeException {
 
