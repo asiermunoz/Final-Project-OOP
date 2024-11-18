@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Main {
+public class RegisterUsers {
     public static void main(String[] args){
         LinkedList<Persona> album = new LinkedList<Persona>();
         album.add(new Persona("Asier", 18, 72.35));
@@ -32,7 +32,7 @@ public class Main {
 
         }
         catch(IOException ex){
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterUsers.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         /*
@@ -50,7 +50,7 @@ public class Main {
             byte[] bytes = Files.readAllBytes(Paths.get("output.json"));
             recoveryPayload = new String(bytes);
         } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(RegisterUsers.class.getName()).log(Level.SEVERE,null,ex);
         }
 
         Type personaListType = new TypeToken<LinkedList<Persona>>(){}.getType();

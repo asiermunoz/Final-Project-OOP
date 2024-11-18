@@ -23,10 +23,6 @@ public class JsonHandler {
     }
 
     public static void writeToJson(LinkedList<User> usersList) {
-        LinkedList<User> existingUsersList = readFromJson();
-        if (existingUsersList != null) {
-            usersList.addAll(existingUsersList);
-        }
         String payload = gson.toJson(usersList);
         try {
             Files.write(Paths.get("register.json"), payload.getBytes());
@@ -39,7 +35,7 @@ public class JsonHandler {
     public static LinkedList<User> readFromJson() {
         String recoveryPayload = "";
         try {
-            byte[] bytes = Files.readAllBytes(Paths.get("output.json"));
+            byte[] bytes = Files.readAllBytes(Paths.get("register.json"));
             recoveryPayload = new String(bytes);
         } catch (IOException ex) {
             Logger.getLogger(JsonHandler.class.getName()).log(Level.SEVERE, null, ex);

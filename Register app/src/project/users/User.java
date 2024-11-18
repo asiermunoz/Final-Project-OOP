@@ -1,8 +1,11 @@
 package project.users;
 
 import project.users.exceptions.InvalidAliasException;
+import project.users.exceptions.InvalidEmailException;
 
-public class User {
+import java.util.Scanner;
+
+public class User{
     private String alias;
     private Email email;
 
@@ -17,8 +20,10 @@ public class User {
         return alias;
     }
     public void setAlias(String alias) {this.alias = alias;}
-    public Email getEmail() {
-        return email;
+    public Email getEmail(){ return email;}
+    public String getStringEmail() {
+        String mail = email.getEmail();
+        return mail;
     }
     public void setEmail(Email email) {this.email = email;}
 
@@ -29,4 +34,5 @@ public class User {
             throw new InvalidAliasException();
         }
     }
+
 }
