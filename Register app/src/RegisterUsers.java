@@ -21,7 +21,6 @@ public class RegisterUsers{
         User user = null;
         Email email = null;
         LinkedList<User> listOfUsers = new LinkedList<User>();
-        String alias;
 
         do{
             listOfUsers = JsonHandler.readFromJson();
@@ -47,7 +46,8 @@ public class RegisterUsers{
                     //EMAIL
                     while (true) {
                         System.out.println("User 1 email: ");
-                        email = new Email(read.nextLine());
+                        String mail = read.next();
+                        email = new Email(mail);
                         try {
                             email.validateEmail();
                             break;
@@ -58,7 +58,7 @@ public class RegisterUsers{
                     //ALIAS
                     while (true) {
                         System.out.println("User 1 alias: ");
-                        alias = read.nextLine();
+                        String alias = read.next();
                         user = new User(alias, email);
                         try {
                             user.validateAlias();
@@ -73,31 +73,6 @@ public class RegisterUsers{
                     break;
 
                 case 2:
-                    //EMAIL
-                    while (true) {
-                        System.out.println("User 1 email: ");
-                        email = new Email(read.nextLine());
-                        try {
-                            email.validateEmail();
-                            break;
-                        } catch (InvalidEmailException ex) {
-                            ex.messageInvalidEmailException();
-                        }
-                    }
-                    //ALIAS
-                    while (true) {
-                        System.out.println("User 1 alias (old): ");
-                        alias = read.nextLine();
-                        user = new User(alias, email);
-                        try {
-                            user.validateAlias();
-                            break;
-                        } catch (InvalidAliasException ex) {
-                            ex.messageInvalidAliasException();
-                        }
-                    }
-
-
                     break;
                 case 3:
                     break;
@@ -113,7 +88,21 @@ public class RegisterUsers{
 
                     break;
                 case 5:
+                    int i = 0;
+                    if(listOfUsers == null) {
+                        listOfUsers = new LinkedList<User>();
+                        System.out.println("LINKED LIST IS EMPTY.");
+                    }
+                    for (User user1 : listOfUsers) {
+                        System.out.println(i + ". " + "alias: " + user1.getAlias() + ", email: " + user1.getStringEmail());
+                        i++;
+                    }
+                    System.out.println("\n Write the index of the user to delete: ");
+                    int index = read.nextInt();
+                    listOfUsers.remove(index);
+                    JsonHandler.writeToJson(listOfUsers);
                     break;
+
                 default:
                     System.out.println("ERROR. Invalid option");
                     break;
