@@ -115,7 +115,7 @@ public class Main {
                         System.out.println("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + "  Es el turno de: " + turn.getAlias() + "  "+ ANSI_RESET);
                         Thread.sleep(2000);
                         while(!out){
-                            board.printTable();
+                            board.show();
                             turn.getHolder().show();
                             System.out.println(ANSI_BLUE + "Score: " + ANSI_RESET + turn.getScore());
                             if(bag.getTotal() == 0){

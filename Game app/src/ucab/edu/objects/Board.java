@@ -1,6 +1,6 @@
 package ucab.edu.objects;
 
-public class Board {
+public class Board implements Show{
     private final int horizontalLength = 15;
     private final int verticalLength = 15;
     private final String[][] table = new String[horizontalLength][verticalLength];
@@ -11,24 +11,6 @@ public class Board {
 
     public int getVerticalLength() {
         return verticalLength;
-    }
-
-    public void printTable(){
-        System.out.printf("%3s"," ");
-        for(int i = 0; i< horizontalLength; i++){
-            System.out.printf("%3s",i);
-            System.out.printf("%s"," ");
-        }
-        System.out.println();
-        for (int i = 0; i < verticalLength; i++){
-            System.out.printf("%2s",(char)(65+i));
-            System.out.printf("%s"," ");
-            for (int j = 0; j < 15; j++){
-                System.out.printf("|%2s",table[i][j]);
-                System.out.printf("%s"," ");
-            }
-            System.out.printf("|%n");
-        }
     }
 
     public void emptyTable() {
@@ -63,6 +45,23 @@ public class Board {
         }
     }
 
+    @Override
+    public void show() {
+        System.out.printf("%3s"," ");
+        for(int i = 0; i< horizontalLength; i++){
+            System.out.printf("%3s",i);
+            System.out.printf("%s"," ");
+        }
+        System.out.println();
+        for (int i = 0; i < verticalLength; i++){
+            System.out.printf("%2s",(char)(65+i));
+            System.out.printf("%s"," ");
+            for (int j = 0; j < 15; j++){
+                System.out.printf("|%2s",table[i][j]);
+                System.out.printf("%s"," ");
+            }
+            System.out.printf("|%n");
+        }
 
-
+    }
 }
