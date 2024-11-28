@@ -1,7 +1,6 @@
 package ucab.edu.objects;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Order {
     ArrayList<Player> players = new ArrayList<Player>();

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Bag {
-    private int total;
+    private int total = 0;
     private ArrayList<Letter> letters = new ArrayList<>();
 
     //Rellenar bolsa inicial
@@ -26,7 +26,7 @@ public class Bag {
         for(int i = 0; i < lettersNeeded; i++){
             if(total!=0){
                 letters.add(takeRandomLetter());
-                this.total--;
+                reduceTotal();
             }
             else{
                 System.out.println("Bolsa vacía.");
@@ -34,6 +34,10 @@ public class Bag {
             }
         }
         return new Holder(letters);
+    }
+
+    private void reduceTotal(){
+        this.total--;
     }
 
     public ArrayList <Letter> changeHolder(int lettersNeeded){

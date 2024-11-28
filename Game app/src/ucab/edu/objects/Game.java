@@ -1,6 +1,4 @@
 package ucab.edu.objects;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
