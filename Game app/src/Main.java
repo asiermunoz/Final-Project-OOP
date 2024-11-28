@@ -199,41 +199,30 @@ public class Main {
                                             System.out.println("Saliendo al menú de opciones.");
                                         }
                                         else if(Objects.equals(change, "1")){
-                                            bag.fillBag(exchange.getHold());
-                                            turn.getHolder().finishExchange(bag,exchange.getHoldSize());
-                                            turn.getHolder().show();
-                                            out=true;
-                                        }
-                                        else if(Objects.equals(change, "2")){
-                                            try{
+                                            try {
                                                 if(exchange.getHoldSize() == 0){
                                                     throw new EmptyArrayException();
                                                 }
-                                                turn.getHolder().backtrack(exchange);
-                                                turn.getHolder().show();
-                                                exchange.show();
-                                            }catch(EmptyArrayException e){
+                                                bag.fillBag(exchange.getHold());
+                                                turn.getHolder().finishExchange(bag, exchange.getHoldSize());
+                                                out = true;
+                                            }catch (EmptyArrayException e){
                                                 System.out.println(e.getMessage());
                                             }
                                         }
+                                        else if(Objects.equals(change, "2")){
+                                            turn.getHolder().backtrack(exchange);
+                                        }
                                         else if(Objects.equals(change, "3")){
-                                            try {
-                                                if (exchange.getHoldSize() == 0) {
-                                                    throw new EmptyArrayException();
-                                                }
-                                                turn.getHolder().getHold().addAll(exchange.getHold());
-                                                exchange = new Exchange();
-                                                turn.getHolder().show();
-                                            }catch(EmptyArrayException e){
-                                                System.out.println(e.getMessage());
-                                            }
+                                            turn.getHolder().restartSelection(exchange);
+                                            exchange = new Exchange();
                                         }
                                         else if((letter = turn.getHolder().takeLetter(change))!=null){
                                             exchange.addLetter(letter);
                                             turn.getHolder().show();
                                             exchange.show();
                                         }
-                                    }while(!Objects.equals(change,"0") && !Objects.equals(change,"1"));
+                                    }while(!Objects.equals(change,"0") && !out);
                                     break;
 
                                 case 3:

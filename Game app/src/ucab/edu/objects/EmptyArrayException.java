@@ -4,6 +4,6 @@ import static ucab.edu.objects.Color.*;
 
 public class EmptyArrayException extends RuntimeException {
     public EmptyArrayException() {
-        super(ANSI_RED +"ERROR. Lista que se desea borrar vacía." + ANSI_RESET);
+        super(ANSI_RED +"ERROR. Lista con la que se desea interactuar vacía." + ANSI_RESET);
     }
 }

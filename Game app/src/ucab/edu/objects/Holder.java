@@ -29,17 +29,33 @@ public class Holder extends LettersHold{
 
     public void finishExchange(Bag bag, int size){
         this.getHold().addAll(bag.changeHolder(size));
+        show();
     }
 
     public void backtrack(LettersHold lettersHold) {
-        addLetter(lettersHold.getHold().getLast());
-        lettersHold.removeLetter();
+        try {
+            if(lettersHold.getHoldSize() == 0){
+                throw new EmptyArrayException();
+            }
+            addLetter(lettersHold.getHold().getLast());
+            lettersHold.removeLetter();
+            show();
+        }catch(EmptyArrayException e){
+            System.out.println(e.getMessage());
+        }
     }
 
-//    public void backtrackExchange(Exchange exchange){
-//        this.tokensHold.addLast(exchange.getChangeLetters().getLast());
-//        exchange.getChangeLetters().removeLast();
-//    }
+    public void restartSelection(LettersHold lettersHold){
+        try {
+            if(lettersHold.getHoldSize() == 0){
+                throw new EmptyArrayException();
+            }
+            getHold().addAll(lettersHold.getHold());
+            show();
+        }catch(EmptyArrayException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     @Override
     public void show() {
