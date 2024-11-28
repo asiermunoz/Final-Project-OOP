@@ -7,13 +7,6 @@ import java.util.Scanner;
 
 public class RegisterUsers{
     public static void main(String[] args) throws InterruptedException {
-        /*
-        //ADD TO LIST
-        listUsersToAdd.add(user2);
-        //MANAGING JSON
-        JsonHandler.writeToJson(listUsersToAdd);
-        LinkedList<User> listOfUsers = JsonHandler.readFromJson();
-        */
 
         //MENU FINAL
         Scanner read = new Scanner(System.in);
@@ -22,10 +15,10 @@ public class RegisterUsers{
         Email email = null;
         LinkedList<User> listOfUsers = new LinkedList<User>();
         int index;
+        String alias, mail;
 
         do{
             listOfUsers = JsonHandler.readFromJson();
-            Scanner select = new Scanner(System.in);
             System.out.println("\t\t MENU JSON FILE: \n");
             System.out.println("1. Register User");
             System.out.println("2. Modify Name");
@@ -34,19 +27,20 @@ public class RegisterUsers{
             System.out.println("0. Salir.\n");
 
             //LISTA DE USUARIOS REGISTRADOS
-            int i = 0;
+            int listIndex = 0;
+
             if(listOfUsers == null) {
                 listOfUsers = new LinkedList<User>();
                 System.out.println("LINKED LIST IS EMPTY.");
             }
             for (User user1 : listOfUsers) {
-                System.out.println(i + ". " + "alias: " + user1.getAlias() + ", email: " + user1.getStringEmail());
-                i++;
+                System.out.println(listIndex + ". " + "alias: " + user1.getAlias() + ", email: " + user1.getStringEmail());
+                listIndex++;
             }
 
             //INSERTAR OPCION
             System.out.println("\n Ingrese la opcion que desea realizar: ");
-            opc = select.nextInt();
+            opc = read.nextInt();
 
 
             switch(opc){
@@ -60,7 +54,7 @@ public class RegisterUsers{
                     //EMAIL
                     while (true) {
                         System.out.println("User 1 email: ");
-                        String mail = read.next();
+                        mail = read.next();
                         email = new Email(mail);
                         try {
                             email.validateEmail();
@@ -72,7 +66,7 @@ public class RegisterUsers{
                     //ALIAS
                     while (true) {
                         System.out.println("User 1 alias: ");
-                        String alias = read.next();
+                        alias = read.next();
                         user = new User(alias, email);
                         try {
                             user.validateAlias();
@@ -98,7 +92,7 @@ public class RegisterUsers{
                     System.out.println("Index of User to Modify: ");
                     index = read.nextInt();
                     System.out.println("Type the new email: ");
-                    String mail = read.next();
+                    mail = read.next();
                     Email emailToModify = new Email(mail);
 
                     listOfUsers.get(index).setEmail(emailToModify);
