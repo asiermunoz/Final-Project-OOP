@@ -72,7 +72,6 @@ public class Main {
         char y;
         Game game = new Game();
         Board board = new Board();
-        board.emptyTable();
         Bag bag = new Bag();
         Letter letter;
         Order order;
@@ -100,10 +99,8 @@ public class Main {
                     //New game
                     System.out.println("Iniciando nuevo juego: ");
                     Thread.sleep(1000);
-                    Player player1 = new Player(user1.getAlias(), 0,
-                            7,bag.fillNewHolder(7), false);
-                    Player player2 = new Player(user2.getAlias(),0,
-                            7,bag.fillNewHolder(7), false);
+                    Player player1 = new Player(user1.getAlias(), 0, bag.fillNewHolder(7), false);
+                    Player player2 = new Player(user2.getAlias(),0, bag.fillNewHolder(7), false);
 
                     //Establecer orden de jugadores
                     order = newOrder(player1,player2);
@@ -234,9 +231,9 @@ public class Main {
                                     break;
                             }
                         }
-                        if(turn.isWinner() || end){break;}
+                        if(turn.getHolder().getHoldSize() == 0 || end){break;}
                     }
-//        }while((!player1.isWinner() && !player2.isWinner()) && !end);
+//        }while((player1.getHolder().getHoldSize() != 0 && player2.getHolder().getHoldSize() != 0) && !end);
 
                     break;
                 case 2:
