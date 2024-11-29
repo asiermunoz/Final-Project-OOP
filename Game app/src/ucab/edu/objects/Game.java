@@ -2,6 +2,7 @@ package ucab.edu.objects;
 import java.util.Scanner;
 
 public class Game {
+
     public boolean endGame(Order order, Player turn){
         Scanner select = new Scanner(System.in);
         int opc;

@@ -1,12 +1,15 @@
 import ucab.edu.objects.*;
+import ucab.edu.objects.users.Email;
+import ucab.edu.objects.users.User;
+import ucab.edu.objects.users.exceptions.InvalidAliasException;
+import ucab.edu.objects.users.exceptions.InvalidEmailException;
+
 import java.io.IOException;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
 import static ucab.edu.objects.Color.*;
-import static ucab.edu.objects.User.*;
 
 public class Main {
 
@@ -52,17 +55,38 @@ public class Main {
         return randomChoice.nextBoolean();
     }
 
-    private static String logIn(){
+    private static User logIn(int index){
         Scanner read = new Scanner(System.in);
-        String email;
-        do{
-            email=read.nextLine();
-            if(!validateEmail(email)){
-                System.out.println(ANSI_RED + "Email no valido." + ANSI_RESET);
-                System.out.println("Ingrese de nuevo su email.");
+        String alias, emailText;
+        Email email;
+        User user;
+
+        //Email Login
+        while(true) {
+            System.out.println("User "+index+" email: ");
+            emailText = read.next();
+            email = new Email(emailText);
+            try {
+                email.validateEmail();
+                break;
+            } catch (InvalidEmailException ex) {
+                ex.messageInvalidEmailException();
             }
-        }while(!validateEmail(email));
-        return email;
+        }
+
+        //Alias Login
+        while(true) {
+            System.out.println("User "+index+" alias: ");
+            alias = read.next();
+            user = new User(alias, email);
+            try {
+                user.validateAlias();
+                break;
+            } catch (InvalidAliasException ex) {
+                ex.messageInvalidAliasException();
+            }
+        }
+        return user;
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -78,18 +102,16 @@ public class Main {
         boolean out;
         boolean end = false;
         String email, alias;
-        User user1 = null, user2 = null;
+        User user1 = null, user2 = null, newUser = null;
         int option;
         System.out.println(ANSI_YELLOW+"MENU DE INGRESO DE USUARIOS:" + ANSI_RESET);
 
         for (int i = 1; i <= 2; i++){
-            System.out.println("Ingrese el mail del usuario " + i + ":");
-            email=logIn();
-            System.out.println("Ingrese el alias del usuario " + i + ":");
-            alias = read.nextLine();
-            if(i==1){ user1 = new User(email,alias); }
-            else { user2 = new User(email,alias); }
+            newUser = logIn(i);
+            if(i==1){ user1 = newUser; }
+            else { user2 = newUser; }
         }
+
         System.out.println(ANSI_GREEN+"\nBienvenidos " + user1.getAlias() + " y " + user2.getAlias());
         Thread.sleep(2000);
         do{

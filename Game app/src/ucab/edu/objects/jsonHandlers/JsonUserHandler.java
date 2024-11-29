@@ -1,9 +1,9 @@
-package json.handler;
+package ucab.edu.objects.jsonHandlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import project.users.User;
+import ucab.edu.objects.users.User;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class JsonHandler {
+public class JsonUserHandler {
     private static Gson gson;
 
      static {
@@ -28,7 +28,7 @@ public class JsonHandler {
             Files.write(Paths.get("users.json"), payload.getBytes());
         }
         catch (IOException ex) {
-            Logger.getLogger(JsonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonUserHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -38,7 +38,7 @@ public class JsonHandler {
             byte[] bytes = Files.readAllBytes(Paths.get("users.json"));
             recoveryPayload = new String(bytes);
         } catch (IOException ex) {
-            Logger.getLogger(JsonHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonUserHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Type userListType = new TypeToken<LinkedList<User>>(){}.getType();
