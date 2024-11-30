@@ -3,8 +3,7 @@ package ucab.edu.objects.jsonHandlers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import ucab.edu.objects.users.User;
-import ucab.edu.objects.Game;
+import ucab.edu.objects.GameInformation;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -23,7 +22,7 @@ public class JsonGamesHandler {
         gson = builder.create();
     }
 
-    public static void writeToJson(LinkedList<User> usersList) {
+    public static void writeToJson(LinkedList<GameInformation> usersList) {
         String payload = gson.toJson(usersList);
         try {
             Files.write(Paths.get("games.json"), payload.getBytes());
@@ -33,7 +32,7 @@ public class JsonGamesHandler {
         }
     }
 
-    public static LinkedList<User> readFromJson() {
+    public static LinkedList<GameInformation> readFromJson() {
         String recoveryPayload = "";
         try {
             byte[] bytes = Files.readAllBytes(Paths.get("games.json"));
@@ -42,7 +41,7 @@ public class JsonGamesHandler {
             Logger.getLogger(JsonUserHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Type userListType = new TypeToken<LinkedList<User>>(){}.getType();
+        Type userListType = new TypeToken<LinkedList<GameInformation>>(){}.getType();
         return gson.fromJson(recoveryPayload, userListType);
     }
 }

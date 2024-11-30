@@ -32,4 +32,21 @@ public class User{
         }
     }
 
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        User user = (User) object;
+        return alias.equals(user.alias) && email.equals(user.email);
+    }
+
+    public boolean equalsName(String name) {
+        if (this.alias.equals(name)) {
+            return true;
+        }
+        return false;
+    }
 }

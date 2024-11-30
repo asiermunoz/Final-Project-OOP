@@ -1,6 +1,6 @@
 package ucab.edu.objects.users.exceptions;
 
-public class InvalidAliasException extends RuntimeException {
+public class InvalidAliasException extends Exception {
 
     //CONSTRUCTOR
     public InvalidAliasException() {}

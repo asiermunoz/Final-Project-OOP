@@ -1,10 +1,13 @@
 import ucab.edu.objects.*;
+import ucab.edu.objects.jsonHandlers.JsonGamesHandler;
+import ucab.edu.objects.jsonHandlers.JsonUserHandler;
 import ucab.edu.objects.users.Email;
 import ucab.edu.objects.users.User;
 import ucab.edu.objects.users.exceptions.InvalidAliasException;
 import ucab.edu.objects.users.exceptions.InvalidEmailException;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
@@ -91,6 +94,12 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
+        //Variables de lectura de archivos
+        boolean gameAlreadyCreated = false;
+        boolean userFound = false;
+        LinkedList<User> usersLinkedList = new LinkedList<User>();
+        LinkedList<GameInformation> gamesInProgress = new LinkedList<GameInformation>();
+
         Scanner read = new Scanner(System.in);
         int opc,opc2,x;
         char y;
@@ -101,19 +110,74 @@ public class Main {
         Order order;
         boolean out;
         boolean end = false;
-        String email, alias;
+        GameInformation currentGameInformation;
         User user1 = null, user2 = null, newUser = null;
         int option;
+
+        //Json Reading
+        usersLinkedList = JsonUserHandler.readFromJson();
+        gamesInProgress = JsonGamesHandler.readFromJson();
+
         System.out.println(ANSI_YELLOW+"MENU DE INGRESO DE USUARIOS:" + ANSI_RESET);
+        for (User testuser : usersLinkedList) {
+            System.out.println("alias: " + testuser.getAlias() + ", email: " + testuser.getStringEmail());
+        }
 
         for (int i = 1; i <= 2; i++){
             newUser = logIn(i);
-            if(i==1){ user1 = newUser; }
-            else { user2 = newUser; }
+
+            //Search newUser in the usersLinkedList exported in the Json file
+            for(int j = 0; j<usersLinkedList.size(); j++) {
+                if(newUser.equals(usersLinkedList.get(j))) {
+                    userFound = true;
+                    j = usersLinkedList.size();
+                }
+            }
+
+            //Validate newUser
+            if(userFound) {
+                if(i==1){ user1 = newUser; }
+                else { user2 = newUser; }
+                userFound = false;
+            } else {
+                System.out.println("El usuario "+i+" no ha sido encontrado, porfavor ingrese un usuario existente");
+                i-=1;
+            }
         }
+
+
 
         System.out.println(ANSI_GREEN+"\nBienvenidos " + user1.getAlias() + " y " + user2.getAlias());
         Thread.sleep(2000);
+
+        //Buscar partida en base al jugador 1
+        for(int i = 0; i <= gamesInProgress.size(); i++) {
+            if(user1.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
+
+                //Si se encuentra al jugador 1 se busca al jugador 2
+                for(int j = 0; j <= gamesInProgress.size(); j++) {
+                    if(user2.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
+                        System.out.println("Partida encontrada");
+                    }
+                }
+
+            //Si no se encuentra se busca el user pero como jugador 2
+            } else if (user1.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
+
+                //Si se encuentra se busca al jugador 2
+                for(int j = 0; j <= gamesInProgress.size(); j++) {
+                    if (user2.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
+                        System.out.println("Partida encontrada");
+                    }
+                }
+
+            //No se consiguio ninguno
+            } else {
+                System.out.println("No se ha encontrado ninguna partida");
+            }
+
+        }
+
         do{
             option = menu();
             switch(option){
