@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Final-Project-OOP" />
     <orderEntry type="library" name="google.code.gson" level="project" />
+    <orderEntry type="library" name="jsoup" level="project" />
   </component>
 </module>

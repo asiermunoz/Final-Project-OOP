@@ -100,6 +100,17 @@ public class Main {
         LinkedList<User> usersLinkedList = new LinkedList<User>();
         LinkedList<GameInformation> gamesInProgress = new LinkedList<GameInformation>();
 
+        //Checker del web scraping
+        WordChecker checker = new WordChecker();
+        boolean existance;
+        /*
+        Ejemplo de como usarlo, borrar antes de la entrega final
+        String palabra = "ejemplo";
+        existance = checker.verifyWord(word);
+        System.out.println("La palabra existe? (expresado en true or false): "+existance);
+         */
+
+        //Variables del juego
         Scanner read = new Scanner(System.in);
         int opc,opc2,x;
         char y;
