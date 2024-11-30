@@ -161,9 +161,10 @@ public class Main {
 
                                                 //Función para colocar palabra en la tabla;
                                                 if (writer.write(toPut, x-1, y - 65)) {
+                                                    int newScore = writer.getScore();
                                                     board = writer.getBoard();
                                                     board.show();
-                                                    turn.setScore(writer.getScore());
+                                                    turn.setScore(newScore + turn.getScore());
                                                     System.out.println(ANSI_BLUE + "Score actual de " + turn.getAlias() + ": " + ANSI_RESET + turn.getScore());
                                                     if(bag.getTotal() != 0){
                                                         turn.getHolder().getHold().addAll(bag.reFill(initialLettersNeeded - turn.getHolder().getHoldSize()));

@@ -15,6 +15,7 @@ public class Vertical extends Rotation{
 
     @Override
     public boolean write(Word word, int x, int y) {
+        Board copyBoard = new Board();
         boolean collision = false;
         boolean scrabble = false;
         int doubleWordBoost = 0;
@@ -31,23 +32,23 @@ public class Vertical extends Rotation{
             //Recorrer
             for (int i = y; i < board.getLength(); i++) {
                 if(word.getHoldSize() != 0) {
-                    if (board.getTable()[i][x] instanceof CentralSquare) {
-                        collision = true;
-                        doubleWordBoost++;
-                    }
-                    if(board.getTable()[i][x] instanceof DoubleWordSquare){
-                        doubleWordBoost++;
-                    }
-                    if(board.getTable()[i][x] instanceof TripleWordSquare){
-                        tripleWordBoost++;
-                    }
                     if (Objects.equals(board.getTable()[i][x].letter.getLetter(), "  ")) {
                         if (word.hold.getFirst().getLetter().length() == 1) {
-                            putSimpleCharacter(i,x,word);
+                            putSimpleCharacter(i, x, word, copyBoard);
                         } else {
-                            putDoubleCharacter(i,x,word);
+                            putDoubleCharacter(i, x, word, copyBoard);
                         }
-                        score = score + board.getTable()[i][x].letter.getValue();
+                        score = score + copyBoard.getTable()[i][x].letter.getValue();
+                        if (board.getTable()[i][x] instanceof CentralSquare) {
+                            collision = true;
+                            doubleWordBoost++;
+                        }
+                        if(board.getTable()[i][x] instanceof DoubleWordSquare){
+                            doubleWordBoost++;
+                        }
+                        if(board.getTable()[i][x] instanceof TripleWordSquare){
+                            tripleWordBoost++;
+                        }
                     }
                     else{
                         collision = true;
@@ -69,6 +70,7 @@ public class Vertical extends Rotation{
             if(tripleWordBoost != 0){
                 tripleWordBonus(tripleWordBoost);
             }
+            transferBoard(copyBoard);
             return true;
         }catch (WordSizeException | EmptyArrayException | LackOfCollisionException e){
             System.out.println(e.getMessage());
