@@ -71,7 +71,7 @@ public class Main {
         return false;
     }
 
-    public static void playGame(Player player1, Player player2, Order order, Board board, Bag bag, int initialLettersNeeded) throws InterruptedException {
+    public static boolean playGame(Player player1, Player player2, Order order, Board board, Bag bag, int initialLettersNeeded) throws InterruptedException {
 
         Scanner read = new Scanner(System.in);
         int opc,opc2,x;
@@ -247,6 +247,22 @@ public class Main {
             }
 
         }while((player1.getHolder().getHoldSize() != 0 && player2.getHolder().getHoldSize() != 0) && !end);
+        if(end){
+            return false;
+        }
+        else{
+            if(player1.getScore() > player2.getScore()){
+                player1.setWinner(true);
+            }
+            else if(player1.getScore() < player2.getScore()){
+                player2.setWinner(true);
+            }
+            else{
+                player1.setWinner(true);
+                player2.setWinner(true);
+            }
+            return true;
+        }
     }
 
     private static User logIn(int index){
@@ -293,6 +309,9 @@ public class Main {
         boolean userFound = false;
         LinkedList<User> usersLinkedList = new LinkedList<User>();
         LinkedList<GameInformation> gamesInProgress = new LinkedList<GameInformation>();
+        int overwriteGameOption;
+        Scanner readOverwriteGameOption = new Scanner(System.in);
+        int indexFoundedGame = 0;
 
         //Checker del web scraping
         WordChecker checker = new WordChecker();
@@ -351,9 +370,11 @@ public class Main {
                 if (user1.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
 
                     //Si se encuentra al jugador 1 se busca al jugador 2
-                    for (int j = 0; j <= gamesInProgress.size(); j++) {
+                    for (int j = 0; j < gamesInProgress.size(); j++) {
                         if (user2.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
                             System.out.println("Partida encontrada");
+                            gameAlreadyCreated = true;
+                            indexFoundedGame = i;
                         }
                     }
 
@@ -361,9 +382,11 @@ public class Main {
                 } else if (user1.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
 
                     //Si se encuentra se busca al jugador 2
-                    for (int j = 0; j <= gamesInProgress.size(); j++) {
+                    for (int j = 0; j < gamesInProgress.size(); j++) {
                         if (user2.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
                             System.out.println("Partida encontrada");
+                            gameAlreadyCreated = true;
+                            indexFoundedGame = i;
                         }
                     }
 
@@ -382,6 +405,29 @@ public class Main {
             option = menu();
             switch(option){
                 case 1:
+                    //Revisa si existe una partida
+                    if(gameAlreadyCreated) {
+                        System.out.println("Ya existe una partida creada para estos jugadores, quiere sobreescribir la partida?");
+                        System.out.println("1. Si");
+                        System.out.println("2. No");
+
+                        overwriteGameOption = readOverwriteGameOption.nextInt();
+                        switch (overwriteGameOption) {
+                            case 1:
+                                System.out.println("Partida sobreescrita");
+                                gamesInProgress.remove(indexFoundedGame);
+                                break;
+                            case 2:
+                                return;
+                            default:
+                                System.out.println(ANSI_RED + "El número ingresado no posee acción alguna\n");
+                                Thread.sleep(500);
+                                break;
+                        }
+
+
+                    }
+
                     //New game
                     System.out.println("Iniciando nuevo juego: ");
                     Thread.sleep(1000);
@@ -391,8 +437,14 @@ public class Main {
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
                     playGame(player1, player2, order, board, bag, initialLettersNeeded);
+
                     break;
                 case 2:
+                    //Check if a game exists
+                    if(!gameAlreadyCreated) {
+                        System.out.println("No existen partidas creadas con estos jugadores, inicie un nuevo juego.");
+                        break;
+                    }
                     break;
                 case 3:
                     break;
