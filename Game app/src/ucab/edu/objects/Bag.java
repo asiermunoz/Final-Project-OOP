@@ -41,9 +41,16 @@ public class Bag {
 
     public ArrayList <Letter> reFill(int lettersNeeded){
         ArrayList <Letter> letters = new ArrayList<>();
-        for(int i = 0; i < lettersNeeded; i++){
-            letters.add(takeRandomLetter());
-            reduceTotal();
+        try {
+            for (int i = 0; i < lettersNeeded; i++) {
+                letters.add(takeRandomLetter());
+                reduceTotal();
+                if (total == 0) {
+                    throw new EmptyBagException();
+                }
+            }
+        }catch(EmptyBagException e){
+            System.out.println(e.getMessage());
         }
         return letters;
     }
