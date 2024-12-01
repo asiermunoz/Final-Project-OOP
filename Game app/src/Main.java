@@ -46,13 +46,36 @@ public class Main {
         return scanner.nextInt();
     }
 
-    public static void turn(Player player1, Player player2, Order order, Board board, Bag bag) throws InterruptedException {
+    public static boolean endGame(Order order, Player turn){
+        Scanner select = new Scanner(System.in);
+        int opc;
+        for(Player next: order.getPlayers()){
+            if(next != turn){
+                do {
+                    System.out.println("El jugador " + next.getAlias() + " desea terminar igualmente la partida?");
+                    System.out.println("1. Sí");
+                    System.out.println("0. No");
+                    opc = select.nextByte();
+                    if (opc == 1) {
+                        System.out.println("Saliendo del juego.");
+                        return true;
+                    } else if (opc == 0) {
+                        System.out.println("Volviendo al juego.");
+                        return false;
+                    } else {
+                        System.out.println("ERROR. número ingresado fuera de los parámetros indicados.");
+                    }
+                }while(opc != 1 && opc != 0);
+            }
+        }
+        return false;
+    }
+
+    public static void playGame(Player player1, Player player2, Order order, Board board, Bag bag, int initialLettersNeeded) throws InterruptedException {
 
         Scanner read = new Scanner(System.in);
         int opc,opc2,x;
-        int initialLettersNeeded = 7;
         char y;
-        Game game = new Game();
         Letter letter;
         boolean out;
         boolean end = false;
@@ -80,7 +103,7 @@ public class Main {
 
                     switch (opc) {
                         case 0:
-                            end = game.endGame(order, turn);
+                            end = endGame(order, turn);
                             out = end;
                             break;
                         case 1:
@@ -274,26 +297,12 @@ public class Main {
         //Checker del web scraping
         WordChecker checker = new WordChecker();
         boolean existance;
-        /*
-        Ejemplo de como usarlo, borrar antes de la entrega final
-        String palabra = "ejemplo";
-        existance = checker.verifyWord(word);
-        System.out.println("La palabra existe? (expresado en true or false): "+existance);
-         */
 
         //Variables del juego
-        Scanner read = new Scanner(System.in);
-        int opc,opc2,x;
-        int initialLettersNeeded = 7;
-        char y;
-        Game game = new Game();
+        final int initialLettersNeeded = 7;
         Board board = new Board();
         Bag bag = new Bag();
-        Letter letter;
         Order order = new Order();
-        boolean out;
-        boolean end = false;
-        GameInformation currentGameInformation;
         User user1 = null, user2 = null, newUser = null;
         int option;
 
@@ -381,9 +390,7 @@ public class Main {
 
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
-                    turn(player1, player2, order, board, bag);
-
-
+                    playGame(player1, player2, order, board, bag, initialLettersNeeded);
                     break;
                 case 2:
                     break;
