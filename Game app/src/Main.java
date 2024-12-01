@@ -8,10 +8,7 @@ import ucab.edu.objects.users.exceptions.InvalidAliasException;
 import ucab.edu.objects.users.exceptions.InvalidEmailException;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static ucab.edu.objects.Color.*;
 
@@ -86,6 +83,8 @@ public class Main {
                 System.out.println();
                 System.out.println("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + "  Es el turno de: " + turn.getAlias() + "  "+ ANSI_RESET);
                 Thread.sleep(1000);
+                Date timer = new Date();
+                System.out.println(timer);
                 while(!out){
                     board.show();
                     turn.getHolder().show();
@@ -93,7 +92,7 @@ public class Main {
                     if(bag.getTotal() == 0){
                         System.out.println(ANSI_RED + "AVISO:" + ANSI_YELLOW + " Bolsa vacía." + ANSI_RESET);
                     }
-                    Thread.sleep(1000);
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
                     System.out.println(ANSI_GREEN + "Indique el número de la acción que desea realizar: " + ANSI_RESET);
                     System.out.println("1. Ingresar palabra.");
                     System.out.println("2. Cambiar fichas.");
@@ -103,6 +102,16 @@ public class Main {
 
                     switch (opc) {
                         case 0:
+                            Date timer2 = new Date();
+                            System.out.println(timer2);
+                            long diferencia = timer2.getTime() - timer.getTime();
+                            long Totalseconds = diferencia / 1000;
+                            long hour = Totalseconds / 3600;
+                            long minutes = (Totalseconds % 3600) / 60;
+                            long seconds = Totalseconds % 60;
+                            System.out.println("DIFERENCIA: " + hour + ":" + minutes + ":" + seconds);
+
+
                             end = endGame(order, turn);
                             out = end;
                             break;
