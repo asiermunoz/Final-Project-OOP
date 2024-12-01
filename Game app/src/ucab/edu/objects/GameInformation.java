@@ -6,13 +6,15 @@ public class GameInformation {
     private Player gamePlayer1;
     private Player gamePlayer2;
     private boolean gameFinished;
+    private Order gamerOrder;
 
-    public GameInformation(Bag gameBag, boolean gameFinished, Player gamePlayer2, Player gamePlayer1, Board gameBoard) {
+    public GameInformation(Bag gameBag, boolean gameFinished, Player gamePlayer2, Player gamePlayer1, Board gameBoard, Order gamerOrder) {
         this.gameBag = gameBag;
         this.gameFinished = gameFinished;
         this.gamePlayer2 = gamePlayer2;
         this.gamePlayer1 = gamePlayer1;
         this.gameBoard = gameBoard;
+        this.gamerOrder = gamerOrder;
     }
 
     public Bag getGameBag() {
@@ -54,6 +56,10 @@ public class GameInformation {
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
     }
+
+    public Order getGamerOrder() { return gamerOrder; }
+
+    public void setGamerOrder(Order gamerOrder) { this.gamerOrder = gamerOrder; }
 
     public String getPlayer1Alias() {
         return gamePlayer1.getAlias();
