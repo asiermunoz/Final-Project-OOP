@@ -1,11 +1,13 @@
-public class Clock {
+package ucab.edu.objects;
+
+public class GameTimer {
     private int seconds = 0;
     private int minutes = 0;
     private int hour = 0;
     private boolean  status = true;
     private String finalTimer;
 
-    public Clock() {
+    public GameTimer() {
         this.seconds = 0;
         this.minutes = 0;
         this.hour = 0;
@@ -63,3 +65,4 @@ public class Clock {
 
     }
 }
+
