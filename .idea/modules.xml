@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Final-Project-OOP.iml" filepath="$PROJECT_DIR$/.idea/Final-Project-OOP.iml" />
       <module fileurl="file://$PROJECT_DIR$/Game app/Game app.iml" filepath="$PROJECT_DIR$/Game app/Game app.iml" />
       <module fileurl="file://$PROJECT_DIR$/Register app/Register app.iml" filepath="$PROJECT_DIR$/Register app/Register app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Timer Tests/Timer Tests.iml" filepath="$PROJECT_DIR$/Timer Tests/Timer Tests.iml" />
     </modules>
   </component>
 </project>
