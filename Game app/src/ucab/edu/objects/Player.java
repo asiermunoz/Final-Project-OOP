@@ -1,8 +1,5 @@
 package ucab.edu.objects;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 public class Player {
     private String alias;
     private int score;

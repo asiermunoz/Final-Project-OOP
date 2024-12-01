@@ -1,7 +1,6 @@
 package ucab.edu.objects;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Bag {
     private int total = 0;
@@ -38,6 +37,15 @@ public class Bag {
 
     private void reduceTotal(){
         this.total--;
+    }
+
+    public ArrayList <Letter> reFill(int lettersNeeded){
+        ArrayList <Letter> letters = new ArrayList<>();
+        for(int i = 0; i < lettersNeeded; i++){
+            letters.add(takeRandomLetter());
+            reduceTotal();
+        }
+        return letters;
     }
 
     public ArrayList <Letter> changeHolder(int lettersNeeded){

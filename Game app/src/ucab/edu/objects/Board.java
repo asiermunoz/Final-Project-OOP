@@ -3,26 +3,14 @@ package ucab.edu.objects;
 import static ucab.edu.objects.Color.*;
 
 public class Board implements Show{
-    private final int horizontalLength = 15;
-    private final int verticalLength = 15;
-    private final Square[][] table = new Square[horizontalLength][verticalLength];
-
-    public int getHorizontalLength() {
-        return horizontalLength;
-    }
-
-    public int getVerticalLength() {
-        return verticalLength;
-    }
-
+    private final int length = 15;
+    private Square[][] table = new Square[length][length];
 
     public Board(){
-        int centralHorizontal = horizontalLength/2;
-        int centralVertical = verticalLength/2;
-
-        for(int i = 0; i<horizontalLength; i++){
-            for(int j = 0; j<verticalLength; j++){
-                if(i==centralHorizontal && j==centralVertical){
+        int central = length/2;
+        for(int i = 0; i<length; i++){
+            for(int j = 0; j<length; j++){
+                if(i==central && j==central){
                     table[i][j] = new CentralSquare(i,j);
                 }
                 else {
@@ -31,8 +19,8 @@ public class Board implements Show{
             }
         }
 
-        for(int i = 0; i<horizontalLength; i++){
-            if(i == 0 || i == horizontalLength - 1) {
+        for(int i = 0; i < length; i++){
+            if(i == 0 || i == length - 1) {
                 table[i][i] = new TripleWordSquare(i, i);
             }
             else if(i == 5 || i == 9){
@@ -41,14 +29,14 @@ public class Board implements Show{
             else if(i == 6 || i == 8){
                 table[i][i] = new DoubleLetterSquare(i,i);
             }
-            else if (i != centralHorizontal){
+            else if (i != central){
                 table[i][i] = new DoubleWordSquare(i,i);
             }
         }
 
         int i = 0;
-        for(int j = verticalLength-1; j >=0; j--){
-            if(j == 0 || j == horizontalLength - 1) {
+        for(int j = length-1; j >=0; j--){
+            if(j == 0 || j == length - 1) {
                 table[i][j] = new TripleWordSquare(i,j);
             }
             else if(j == 5 || j == 9){
@@ -57,7 +45,7 @@ public class Board implements Show{
             else if(j == 6 || j == 8){
                 table[i][j] = new DoubleLetterSquare(i,j);
             }
-            else if (j != centralVertical){
+            else if (j != central){
                 table[i][j] = new DoubleWordSquare(i,j);
             }
             i++;
@@ -86,19 +74,28 @@ public class Board implements Show{
         table[2][8] = new DoubleLetterSquare(2,8);
         table[8][12] = new DoubleLetterSquare(8,12);
         table[12][8] = new DoubleLetterSquare(12,8);
-        table[centralHorizontal][3] = new DoubleLetterSquare(centralHorizontal,3);
-        table[3][centralVertical] = new DoubleLetterSquare(3,centralVertical);
-        table[centralHorizontal][11] = new DoubleLetterSquare(centralHorizontal,11);
-        table[11][centralVertical] = new DoubleLetterSquare(11,centralVertical);
-        table[0][centralVertical] = new TripleWordSquare(0, centralVertical);
-        table[horizontalLength-1][centralVertical] = new TripleWordSquare(horizontalLength-1,centralVertical);
-        table[centralHorizontal][0] = new TripleWordSquare(centralHorizontal, 0);
-        table[centralHorizontal][verticalLength-1] = new TripleWordSquare(centralHorizontal, 0);
+        table[central][3] = new DoubleLetterSquare(central,3);
+        table[3][central] = new DoubleLetterSquare(3,central);
+        table[central][11] = new DoubleLetterSquare(central,11);
+        table[11][central] = new DoubleLetterSquare(11,central);
+        table[0][central] = new TripleWordSquare(0, central);
+        table[length-1][central] = new TripleWordSquare(length-1,central);
+        table[central][0] = new TripleWordSquare(central, 0);
+        table[central][length-1] = new TripleWordSquare(central, 0);
     }
+
+    public int getLength() {
+        return length;
+    }
+
+    public Square[][] getTable() {
+        return table;
+    }
+
 
     public boolean verifyCoordinateX(int coordinate) {
         try {
-            if (coordinate > 0 && coordinate <= horizontalLength) {
+            if (coordinate > 0 && coordinate <= length) {
                 return true;
             }
             throw new OutOfDimensionsException();
@@ -110,7 +107,7 @@ public class Board implements Show{
 
     public boolean verifyCoordinateY(char coordinate) {
         try {
-            if ((int)(coordinate) >= 65 && (int)(coordinate) <= (65 + verticalLength)) {
+            if ((int)(coordinate) >= 65 && (int)(coordinate) <= (65 + length)) {
                 return true;
             }
             throw new OutOfDimensionsException();
@@ -123,18 +120,16 @@ public class Board implements Show{
     @Override
     public void show() {
         System.out.printf("%3s"," ");
-        for(int i = 1; i<= horizontalLength; i++){
-            System.out.printf("%3s",i);
-            System.out.printf("%s"," ");
+        for(int i = 1; i<= length; i++){
+            System.out.printf("%s%3s%s", " ", i, " ");
         }
         System.out.println();
-        for (int i = 0; i < verticalLength; i++){
+        for (int i = 0; i < length; i++){
             System.out.printf("%2s",(char)(65+i));
             System.out.printf("%s"," ");
-            for (int j = 0; j < horizontalLength; j++){
-                String place = table[i][j].color + table[i][j].letter + ANSI_RESET;
-                System.out.printf("|%2s",place);
-                System.out.printf("%s"," ");
+            for (int j = 0; j < length; j++){
+                String place = table[i][j].color + table[i][j].letter.getLetter() + ANSI_RESET;
+                System.out.printf("|%s%2s%s", " ", place," ");
             }
             System.out.printf("|%n");
         }

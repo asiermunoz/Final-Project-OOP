@@ -3,7 +3,7 @@ package ucab.edu.objects;
 import java.util.ArrayList;
 
 public abstract class LettersHold implements Show{
-    private ArrayList<Letter> hold = new ArrayList<>();
+    protected ArrayList<Letter> hold = new ArrayList<>();
 
     public ArrayList<Letter> getHold() {
         return hold;

@@ -1,5 +1,4 @@
 package ucab.edu.objects;
-
 import static ucab.edu.objects.Color.*;
 
 public class OutOfDimensionsException extends RuntimeException {

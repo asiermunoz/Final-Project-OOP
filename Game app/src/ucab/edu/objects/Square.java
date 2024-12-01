@@ -3,24 +3,28 @@ package ucab.edu.objects;
 import static ucab.edu.objects.Color.*;
 
 public abstract class Square{
-    protected String letter;
+    protected Letter letter;
     protected String color;
     protected int x;
     protected int y;
 
-    public Square(int x, int y){
-        this.letter = "  ";
+    public Square(int y, int x){
+        this.letter = new Letter ("  ", 0);
         this.color = ANSI_YELLOW_BACKGROUND;
         this.x = x;
         this.y = y;
     }
 
     public String getLetter() {
-        return letter;
+        return letter.getLetter();
     }
 
-    public void setLetter(String letter) {
+    public void setLetter(Letter letter) {
         this.letter = letter;
+    }
+
+    public int getValue() {
+        return letter.getValue();
     }
 
     public String getColor() {

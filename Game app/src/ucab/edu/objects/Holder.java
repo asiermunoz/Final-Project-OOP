@@ -16,7 +16,7 @@ public class Holder extends LettersHold{
         try {
             for (Letter letter : getHold()) {
                 if (Objects.equals(letter.getLetter(), token)) {
-                    getHold().remove(letter);
+                    hold.remove(letter);
                     return letter;
                 }
             }
@@ -28,7 +28,14 @@ public class Holder extends LettersHold{
     }
 
     public void finishExchange(Bag bag, int size){
-        this.getHold().addAll(bag.changeHolder(size));
+        this.hold.addAll(bag.changeHolder(size));
+        show();
+    }
+
+    public void exchangeAll(Bag bag){
+        bag.fillBag(hold);
+        int size = getHoldSize();
+        this.hold = bag.changeHolder(size);
         show();
     }
 
@@ -40,6 +47,7 @@ public class Holder extends LettersHold{
             addLetter(lettersHold.getHold().getLast());
             lettersHold.removeLetter();
             show();
+            lettersHold.show();
         }catch(EmptyArrayException e){
             System.out.println(e.getMessage());
         }
@@ -50,7 +58,7 @@ public class Holder extends LettersHold{
             if(lettersHold.getHoldSize() == 0){
                 throw new EmptyArrayException();
             }
-            getHold().addAll(lettersHold.getHold());
+            hold.addAll(lettersHold.getHold());
             show();
         }catch(EmptyArrayException e){
             System.out.println(e.getMessage());
@@ -60,7 +68,7 @@ public class Holder extends LettersHold{
     @Override
     public void show() {
         System.out.print(ANSI_YELLOW + "\nFichas actuales del jugador:" + ANSI_RESET);
-        for(Letter letter:getHold()){
+        for(Letter letter:hold){
             System.out.printf("%3s",letter.getLetter());
             System.out.printf("|%s",letter.getValue());
         }
