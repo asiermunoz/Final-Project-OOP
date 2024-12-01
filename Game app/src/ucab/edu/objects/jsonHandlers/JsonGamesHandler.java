@@ -48,7 +48,7 @@ public class JsonGamesHandler {
 
     public static void clearJsonFile() {
         try {
-            // Sobrescribir el contenido del archivo con un JSON vacío (puede ser un array vacío, un objeto vacío, etc.)
+            // Sobrescribir el contenido del archivo con un JSON vacío
             Files.write(Paths.get("games.json"), "[]".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING); }
         catch (IOException ex) {
             Logger.getLogger(JsonGamesHandler.class.getName()).log(Level.SEVERE, null, ex);
