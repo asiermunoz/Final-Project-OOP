@@ -22,13 +22,13 @@ public class JsonGamesHandler {
         gson = builder.create();
     }
 
-    public static void writeToJson(LinkedList<GameInformation> usersList) {
-        String payload = gson.toJson(usersList);
+    public static void writeToJson(LinkedList<GameInformation> gamesList) {
+        String payload = gson.toJson(gamesList);
         try {
             Files.write(Paths.get("games.json"), payload.getBytes());
         }
         catch (IOException ex) {
-            Logger.getLogger(JsonUserHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonGamesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -38,7 +38,7 @@ public class JsonGamesHandler {
             byte[] bytes = Files.readAllBytes(Paths.get("games.json"));
             recoveryPayload = new String(bytes);
         } catch (IOException ex) {
-            Logger.getLogger(JsonUserHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonGamesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Type userListType = new TypeToken<LinkedList<GameInformation>>(){}.getType();

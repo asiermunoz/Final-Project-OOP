@@ -2,7 +2,7 @@ package ucab.edu.objects;
 
 import static ucab.edu.objects.Color.*;
 
-public abstract class Square{
+public class Square{
     protected Letter letter;
     protected String color;
     protected int x;
