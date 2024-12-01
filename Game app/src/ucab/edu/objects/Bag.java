@@ -1,6 +1,7 @@
 package ucab.edu.objects;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bag {
     private int total = 0;
@@ -74,7 +75,4 @@ public class Bag {
         letters.remove(i);
         return letter;
     }
-
-
-
 }

@@ -34,7 +34,7 @@ public class LettersList {
         list.addLast(new LettersAmount("X",10,1));
         list.addLast(new LettersAmount("Y",5,1));
         list.addLast(new LettersAmount("Z",10,1));
-        list.addLast(new LettersAmount("☻",0,2));
+        list.addLast(new LettersAmount("☻",Letter.jokerValue,2));
     }
 
     public ArrayList<LettersAmount> getList() {

@@ -1,5 +1,4 @@
 package ucab.edu.objects;
-
 import java.util.Objects;
 
 public class Vertical extends Rotation{
@@ -9,15 +8,18 @@ public class Vertical extends Rotation{
     }
 
     @Override
-    public boolean read() {
+    public boolean initialRead(Board copy, int coordinate) {
         return false;
     }
 
     @Override
-    public boolean write(Word word, int x, int y) {
+    public boolean write(Word word, int x, int y, int initialLettersNeeded) {
         Board copyBoard = new Board();
+        transferBoard(copyBoard);
         boolean collision = false;
         boolean scrabble = false;
+        int doubleLetterBoost = 0;
+        int tripleLetterBoost = 0;
         int doubleWordBoost = 0;
         int tripleWordBoost = 0;
         score = 0;
@@ -25,7 +27,7 @@ public class Vertical extends Rotation{
             if(word.getHoldSize() == 0){
                 throw new EmptyArrayException();
             }
-            if(word.getHoldSize() == 7){
+            if(word.getHoldSize() == initialLettersNeeded){
                 scrabble = true;
             }
 
@@ -33,15 +35,17 @@ public class Vertical extends Rotation{
             for (int i = y; i < board.getLength(); i++) {
                 if(word.getHoldSize() != 0) {
                     if (Objects.equals(board.getTable()[i][x].letter.getLetter(), "  ")) {
-                        if (word.hold.getFirst().getLetter().length() == 1) {
-                            putSimpleCharacter(i, x, word, copyBoard);
-                        } else {
-                            putDoubleCharacter(i, x, word, copyBoard);
-                        }
-                        score = score + copyBoard.getTable()[i][x].letter.getValue();
+                        copyBoard.getTable()[i][x].letter = word.hold.removeFirst();
+                        copyBoard.getTable()[i][x].marked = true;
                         if (board.getTable()[i][x] instanceof CentralSquare) {
                             collision = true;
                             doubleWordBoost++;
+                        }
+                        if(board.getTable()[i][x] instanceof  DoubleLetterSquare){
+                            doubleLetterBoost = doubleLetterBoost + copyBoard.getTable()[i][x].letter.getValue();
+                        }
+                        if(board.getTable()[i][x] instanceof  TripleLetterSquare){
+                            tripleLetterBoost = tripleLetterBoost + copyBoard.getTable()[i][x].letter.getValue();
                         }
                         if(board.getTable()[i][x] instanceof DoubleWordSquare){
                             doubleWordBoost++;
@@ -49,30 +53,43 @@ public class Vertical extends Rotation{
                         if(board.getTable()[i][x] instanceof TripleWordSquare){
                             tripleWordBoost++;
                         }
+                        if (!collision) {
+                            collision = reviseCollision(copyBoard, i, x);
+                        }
                     }
                     else{
                         collision = true;
                     }
                 }
             }
-            if(!collision){
-                throw new LackOfCollisionException();
-            }
             if(word.getHoldSize() != 0){
                 throw new WordSizeException();
             }
+            if(!readBoard(copyBoard)){
+                throw new InexistentWord();
+            }
+            if(!collision){
+                throw new LackOfCollisionException();
+            }
             if(scrabble){
-                scrabbleBonus();
+                score = bonus.scrabbleBonus(score);
+            }
+            if(doubleLetterBoost != 0){
+                score = score + bonus.doubleLetterBonus(doubleLetterBoost);
+            }
+            if(tripleLetterBoost != 0){
+                score = score + bonus.tripleLetterBonus(doubleLetterBoost);
             }
             if(doubleWordBoost != 0){
-                doubleWordBonus(doubleWordBoost);
+                score = bonus.doubleWordBonus(score, doubleWordBoost);
             }
             if(tripleWordBoost != 0){
-                tripleWordBonus(tripleWordBoost);
+                score = bonus.tripleWordBonus(score, tripleWordBoost);
             }
-            transferBoard(copyBoard);
+            this.board = copyBoard;
+            this.board.setMarkersFalse();
             return true;
-        }catch (WordSizeException | EmptyArrayException | LackOfCollisionException e){
+        }catch (WordSizeException | EmptyArrayException | LackOfCollisionException | InexistentWord e){
             System.out.println(e.getMessage());
             return false;
         } catch (InterruptedException e) {

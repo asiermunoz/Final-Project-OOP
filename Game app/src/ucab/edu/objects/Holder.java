@@ -11,13 +11,47 @@ public class Holder extends LettersHold{
         setHold(hold);
     }
 
+    public void takeEverythingBack(LettersHold lettersHold){
+        try {
+            if (lettersHold.getHoldSize() == 0) {
+                throw new EmptyArrayException();
+            }
+            for (Letter letter : lettersHold.getHold()) {
+                if (letter.isJoker()) {
+                    addLetter(new Letter("☻", Letter.jokerValue));
+                } else {
+                    addLetter(letter);
+                }
+            }
+        }catch(EmptyArrayException _){
+        }
+    }
+
     public Letter takeLetter(String token) {
         token = token.toUpperCase();
+        boolean joker = false;
+        int jokerMark = 0;
         try {
             for (Letter letter : getHold()) {
                 if (Objects.equals(letter.getLetter(), token)) {
                     hold.remove(letter);
                     return letter;
+                }
+                else if(Objects.equals(letter.getLetter(), "☻")){
+                    joker = true;
+                }
+                if(!joker){
+                    jokerMark++;
+                }
+            }
+            if(joker){
+                for(Letter letter: new LettersList().getList()){
+                    if(Objects.equals(letter.getLetter(), token)){
+                        hold.remove(jokerMark);
+                        letter.setJoker(true);
+                        letter.setValue(Letter.jokerValue);
+                        return letter;
+                    }
                 }
             }
             throw new LetterNotFoundException();
@@ -44,22 +78,15 @@ public class Holder extends LettersHold{
             if(lettersHold.getHoldSize() == 0){
                 throw new EmptyArrayException();
             }
-            addLetter(lettersHold.getHold().getLast());
+            if(lettersHold.getHold().getLast().isJoker()){
+                addLetter(new Letter("☻",Letter.jokerValue));
+            }
+            else {
+                addLetter(lettersHold.getHold().getLast());
+            }
             lettersHold.removeLetter();
             show();
             lettersHold.show();
-        }catch(EmptyArrayException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void restartSelection(LettersHold lettersHold){
-        try {
-            if(lettersHold.getHoldSize() == 0){
-                throw new EmptyArrayException();
-            }
-            hold.addAll(lettersHold.getHold());
-            show();
         }catch(EmptyArrayException e){
             System.out.println(e.getMessage());
         }

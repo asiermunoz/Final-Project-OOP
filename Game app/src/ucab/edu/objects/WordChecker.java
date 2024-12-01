@@ -18,7 +18,6 @@ public class WordChecker {
                 }
             }
         } catch (Exception e) {
-            System.out.println("La palabra no existe");
             return false;
         }
         return false;

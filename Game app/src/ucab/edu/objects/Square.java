@@ -5,6 +5,7 @@ import static ucab.edu.objects.Color.*;
 public abstract class Square{
     protected Letter letter;
     protected String color;
+    protected boolean marked;
     protected int x;
     protected int y;
 
@@ -13,6 +14,7 @@ public abstract class Square{
         this.color = ANSI_YELLOW_BACKGROUND;
         this.x = x;
         this.y = y;
+        this. marked = false;
     }
 
     public String getLetter() {

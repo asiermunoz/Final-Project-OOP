@@ -15,6 +15,8 @@ import java.util.Scanner;
 import static ucab.edu.objects.Color.*;
 
 public class Main {
+    private static final int initialLettersNeeded = 7;
+    private static final Scanner read = new Scanner(System.in);
 
     public static Rotation setWriter(int opc, Board board){
         try{
@@ -35,7 +37,6 @@ public class Main {
 
     //Menú principal.
     private static int menu(){
-        Scanner scanner = new Scanner(System.in);
         System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "---------SCRABBLE-UCAB---------" + ANSI_RESET);
         System.out.println(ANSI_YELLOW + "Ingrese el número de la acción que desee realizar:" + ANSI_RESET);
         System.out.println("1. Jugar nueva Partida.");
@@ -43,11 +44,10 @@ public class Main {
         System.out.println("3. Mostrar lista total de jugadores.");
         System.out.println("4. Mostrar estadística de jugadores.");
         System.out.println("0. Salir.");
-        return scanner.nextInt();
+        return read.nextInt();
     }
 
     public static boolean endGame(Order order, Player turn){
-        Scanner select = new Scanner(System.in);
         int opc;
         for(Player next: order.getPlayers()){
             if(next != turn){
@@ -55,7 +55,7 @@ public class Main {
                     System.out.println("El jugador " + next.getAlias() + " desea terminar igualmente la partida?");
                     System.out.println("1. Sí");
                     System.out.println("0. No");
-                    opc = select.nextByte();
+                    opc = read.nextByte();
                     if (opc == 1) {
                         System.out.println("Saliendo del juego.");
                         return true;
@@ -71,9 +71,8 @@ public class Main {
         return false;
     }
 
-    public static boolean playGame(Player player1, Player player2, Order order, Board board, Bag bag, int initialLettersNeeded) throws InterruptedException {
 
-        Scanner read = new Scanner(System.in);
+    public static boolean playGame(Player player1, Player player2, Order order, Board board, Bag bag) throws InterruptedException {
         int opc,opc2,x;
         char y;
         Letter letter;
@@ -134,6 +133,7 @@ public class Main {
                             turn.getHolder().show();
                             do{
                                 System.out.println("\nColoque cada letra que desea colocar: ");
+                                System.out.println("Si desea colocar un comodín simplemente coloque la letra con la que desea reemplazarlo.");
                                 System.out.println(ANSI_YELLOW + "(Letras ya presentes en el tablero se tomaran en cuenta automáticamente)");
                                 System.out.println(ANSI_GREEN + "En caso que desee realizar otra acción ingrese uno de los siguientes números:");
                                 System.out.println("1. Terminar y colocar palabra.");
@@ -142,7 +142,7 @@ public class Main {
                                 System.out.println("0. Volver al menú de opciones." + ANSI_RESET);
                                 token = read.next();
                                 if(Objects.equals(token,"0")){
-                                    turn.getHolder().getHold().addAll(word.getHold());
+                                    turn.getHolder().takeEverythingBack(word);
                                     System.out.println("Saliendo al menú de opciones.");
                                 }
                                 else if(Objects.equals(token,"1")){
@@ -150,7 +150,7 @@ public class Main {
                                     toPut.getHold().addAll(word.getHold());
 
                                     //Función para colocar palabra en la tabla;
-                                    if (writer.write(toPut, x-1, y - 65)) {
+                                    if (writer.write(toPut, x-1, y - 65, initialLettersNeeded)) {
                                         int newScore = writer.getScore();
                                         board = writer.getBoard();
                                         board.show();
@@ -166,7 +166,7 @@ public class Main {
                                     else{
                                         board.show();
                                         writer.setBoard(board);
-                                        turn.getHolder().getHold().addAll(word.getHold());
+                                        turn.getHolder().takeEverythingBack(word);
                                         word = new Word();
                                         turn.getHolder().show();
                                         word.show();
@@ -176,7 +176,7 @@ public class Main {
                                     turn.getHolder().backtrack(word);
                                 }
                                 else if(Objects.equals(token,"3")){
-                                    turn.getHolder().restartSelection(word);
+                                    turn.getHolder().takeEverythingBack(word);
                                     word = new Word();
                                 }
                                 else if((letter = turn.getHolder().takeLetter(token))!=null){
@@ -192,6 +192,7 @@ public class Main {
                             String change;
                             do {
                                 System.out.println("\nEscriba la letra de la ficha que desea cambiar: ");
+                                System.out.println("Si desea intercambiar un comodín se recomienda copiar y pegar la carita feliz para evitar confuciones.");
                                 System.out.println(ANSI_GREEN + "En caso que desee realizar otra acción ingrese uno de los siguientes números:");
                                 System.out.println("1. Terminar y realizar cambio de fichas.");
                                 System.out.println("2. Retroceder selección.");
@@ -200,7 +201,7 @@ public class Main {
                                 System.out.println("0. Volver al menú de opciones." + ANSI_RESET);
                                 change = read.next();
                                 if(Objects.equals(change, "0")) {
-                                    turn.getHolder().getHold().addAll(exchange.getHold());
+                                    turn.getHolder().takeEverythingBack(exchange);
                                     System.out.println("Saliendo al menú de opciones.");
                                 }
                                 else if(Objects.equals(change, "1")){
@@ -211,15 +212,14 @@ public class Main {
                                         bag.fillBag(exchange.getHold());
                                         turn.getHolder().finishExchange(bag, exchange.getHoldSize());
                                         out = true;
-                                    }catch (EmptyArrayException e){
-                                        System.out.println(e.getMessage());
+                                    }catch (EmptyArrayException _){
                                     }
                                 }
                                 else if(Objects.equals(change, "2")){
                                     turn.getHolder().backtrack(exchange);
                                 }
                                 else if(Objects.equals(change, "3")){
-                                    turn.getHolder().restartSelection(exchange);
+                                    turn.getHolder().takeEverythingBack(exchange);
                                     exchange = new Exchange();
                                 }
                                 else if(Objects.equals(change,"4")){
@@ -239,7 +239,7 @@ public class Main {
                             break;
 
                         default:
-                            System.out.println("ERROR. número ingresado fuera de los parámetros indicados.");
+                            System.out.println(ANSI_RED + "ERROR. número ingresado fuera de los parámetros indicados." + ANSI_RESET);
                             break;
                     }
                 }
@@ -251,22 +251,28 @@ public class Main {
             return false;
         }
         else{
+            System.out.println(ANSI_CYAN + "Score del jugador " + player1.getAlias() +  ": " + ANSI_RESET + player1.getScore());
+            System.out.println(ANSI_CYAN + "Score del jugador " + player2.getAlias() +  ": " + ANSI_RESET + player2.getScore());
+            Thread.sleep(2000);
             if(player1.getScore() > player2.getScore()){
                 player1.setWinner(true);
+                System.out.println(ANSI_YELLOW + "¡¡¡¡¡El ganador fue: " + player1.getAlias() + "!!!!!");
+                System.out.println("¡¡¡¡¡¡¡" + ANSI_RED + "F" + ANSI_YELLOW + "E" + ANSI_CYAN + "L" + ANSI_PURPLE + "I" + ANSI_WHITE + "C" + ANSI_YELLOW + "I" + ANSI_RED + "D" + ANSI_GREEN +"A" + ANSI_CYAN + "D" + ANSI_YELLOW + "E" + ANSI_GREEN + "S" + ANSI_RESET + "!!!!!!!!!");
             }
             else if(player1.getScore() < player2.getScore()){
                 player2.setWinner(true);
+                System.out.println(ANSI_YELLOW + "¡¡¡¡¡El ganador fue: " + player2.getAlias() + "!!!!!");
             }
             else{
                 player1.setWinner(true);
                 player2.setWinner(true);
+                System.out.println(ANSI_YELLOW + "Empate. ");
             }
             return true;
         }
     }
 
     private static User logIn(int index){
-        Scanner read = new Scanner(System.in);
         String alias, emailText;
         Email email;
         User user;
@@ -309,16 +315,8 @@ public class Main {
         boolean userFound = false;
         LinkedList<User> usersLinkedList = new LinkedList<User>();
         LinkedList<GameInformation> gamesInProgress = new LinkedList<GameInformation>();
-        int overwriteGameOption;
-        Scanner readOverwriteGameOption = new Scanner(System.in);
-        int indexFoundedGame = 0;
-
-        //Checker del web scraping
-        WordChecker checker = new WordChecker();
-        boolean existance;
 
         //Variables del juego
-        final int initialLettersNeeded = 7;
         Board board = new Board();
         Bag bag = new Bag();
         Order order = new Order();
@@ -370,11 +368,9 @@ public class Main {
                 if (user1.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
 
                     //Si se encuentra al jugador 1 se busca al jugador 2
-                    for (int j = 0; j < gamesInProgress.size(); j++) {
+                    for (int j = 0; j <= gamesInProgress.size(); j++) {
                         if (user2.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
                             System.out.println("Partida encontrada");
-                            gameAlreadyCreated = true;
-                            indexFoundedGame = i;
                         }
                     }
 
@@ -382,11 +378,9 @@ public class Main {
                 } else if (user1.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
 
                     //Si se encuentra se busca al jugador 2
-                    for (int j = 0; j < gamesInProgress.size(); j++) {
+                    for (int j = 0; j <= gamesInProgress.size(); j++) {
                         if (user2.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
                             System.out.println("Partida encontrada");
-                            gameAlreadyCreated = true;
-                            indexFoundedGame = i;
                         }
                     }
 
@@ -405,29 +399,6 @@ public class Main {
             option = menu();
             switch(option){
                 case 1:
-                    //Revisa si existe una partida
-                    if(gameAlreadyCreated) {
-                        System.out.println("Ya existe una partida creada para estos jugadores, quiere sobreescribir la partida?");
-                        System.out.println("1. Si");
-                        System.out.println("2. No");
-
-                        overwriteGameOption = readOverwriteGameOption.nextInt();
-                        switch (overwriteGameOption) {
-                            case 1:
-                                System.out.println("Partida sobreescrita");
-                                gamesInProgress.remove(indexFoundedGame);
-                                break;
-                            case 2:
-                                return;
-                            default:
-                                System.out.println(ANSI_RED + "El número ingresado no posee acción alguna\n");
-                                Thread.sleep(500);
-                                break;
-                        }
-
-
-                    }
-
                     //New game
                     System.out.println("Iniciando nuevo juego: ");
                     Thread.sleep(1000);
@@ -436,15 +407,12 @@ public class Main {
 
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
-                    playGame(player1, player2, order, board, bag, initialLettersNeeded);
-
+                    if(!playGame(player1, player2, order, board, bag)) {
+                        System.out.println("Guardando Partida...");
+                        //Función para guardar partida.
+                    }
                     break;
                 case 2:
-                    //Check if a game exists
-                    if(!gameAlreadyCreated) {
-                        System.out.println("No existen partidas creadas con estos jugadores, inicie un nuevo juego.");
-                        break;
-                    }
                     break;
                 case 3:
                     break;
