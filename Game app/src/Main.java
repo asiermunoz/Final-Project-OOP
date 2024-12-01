@@ -71,7 +71,7 @@ public class Main {
         return false;
     }
 
-    public static void playGame(Player player1, Player player2, Order order, Board board, Bag bag) throws InterruptedException {
+    public static boolean playGame(Player player1, Player player2, Order order, Board board, Bag bag) throws InterruptedException {
         int opc,opc2,x;
         char y;
         Letter letter;
@@ -245,6 +245,22 @@ public class Main {
             }
 
         }while((player1.getHolder().getHoldSize() != 0 && player2.getHolder().getHoldSize() != 0) && !end);
+        if(end){
+            return false;
+        }
+        else{
+            if(player1.getScore() > player2.getScore()){
+                player1.setWinner(true);
+            }
+            else if(player1.getScore() < player2.getScore()){
+                player2.setWinner(true);
+            }
+            else{
+                player1.setWinner(true);
+                player2.setWinner(true);
+            }
+            return true;
+        }
     }
 
     private static User logIn(int index){
@@ -386,7 +402,10 @@ public class Main {
 
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
-                    playGame(player1, player2, order, board, bag);
+                    if(!playGame(player1, player2, order, board, bag)) {
+                        System.out.println("Guardando Partida...");
+                        //Función para guardar partida.
+                    }
                     break;
                 case 2:
                     break;
