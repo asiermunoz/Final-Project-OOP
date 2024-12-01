@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,4 +45,13 @@ public class JsonGamesHandler {
         Type userListType = new TypeToken<LinkedList<GameInformation>>(){}.getType();
         return gson.fromJson(recoveryPayload, userListType);
     }
-}
+
+    public static void clearJsonFile() {
+        try {
+            // Sobrescribir el contenido del archivo con un JSON vacío (puede ser un array vacío, un objeto vacío, etc.)
+            Files.write(Paths.get("games.json"), "[]".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING); }
+        catch (IOException ex) {
+            Logger.getLogger(JsonGamesHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }

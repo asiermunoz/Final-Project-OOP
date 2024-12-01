@@ -312,7 +312,6 @@ public class Main {
         LinkedList<GameInformation> finishedGames = new LinkedList<GameInformation>();
         int overwriteGameOption;
         Scanner readOverwriteGameOption = new Scanner(System.in);
-        int indexFoundedGame = 0;
         GameInformation foundedGame = null;
 
         //Checker del web scraping
@@ -320,8 +319,8 @@ public class Main {
         boolean existance;
 
         //Variables del juego
-        Board board = new Board();
-        Bag bag = new Bag();
+        Board board;
+        Bag bag;
         Order order = new Order();
         User user1 = null, user2 = null, newUser = null;
         int option;
@@ -381,12 +380,12 @@ public class Main {
                 if (user1.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
 
                     //Si se encuentra al jugador 1 se busca al jugador 2
-                    for (int j = 0; j <= gamesInProgress.size(); j++) {
+                    for (int j = 0; j < gamesInProgress.size(); j++) {
                         if (user2.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
                             System.out.println("Partida encontrada");
                             gameAlreadyCreated = true;
                             foundedGame = gamesInProgress.get(i);
-                            indexFoundedGame = i;
+                            break;
                         }
                     }
 
@@ -394,12 +393,12 @@ public class Main {
                 } else if (user1.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
 
                     //Si se encuentra se busca al jugador 2
-                    for (int j = 0; j <= gamesInProgress.size(); j++) {
+                    for (int j = 0; j < gamesInProgress.size(); j++) {
                         if (user2.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
                             System.out.println("Partida encontrada");
                             gameAlreadyCreated = true;
                             foundedGame = gamesInProgress.get(i);
-                            indexFoundedGame = i;
+                            break;
                         }
                     }
 
@@ -428,8 +427,12 @@ public class Main {
                         switch (overwriteGameOption) {
                             case 1:
                                 System.out.println("Partida sobreescrita");
-                                gamesInProgress.remove(indexFoundedGame);
-                                JsonGamesHandler.writeToJson(gamesInProgress);
+                                gamesInProgress.remove(foundedGame);
+                                if(gamesInProgress.isEmpty()) {
+                                    JsonGamesHandler.clearJsonFile();
+                                } else {
+                                    JsonGamesHandler.writeToJson(gamesInProgress);
+                                }
                                 break;
                             case 2:
                                 continue;
@@ -444,8 +447,10 @@ public class Main {
                     //New game
                     System.out.println("Iniciando nuevo juego: ");
                     Thread.sleep(1000);
+                    bag = new Bag();
                     player1 = new Player(user1.getAlias(), 0, bag.fillNewHolder(initialLettersNeeded), false);
                     player2 = new Player(user2.getAlias(),0, bag.fillNewHolder(initialLettersNeeded), false);
+                    board = new Board();
 
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
