@@ -70,7 +70,7 @@ public class Main {
         return false;
     }
 
-    public static GameInformation playGame(Player player1, Player player2, Order order, Board board, Bag bag) throws InterruptedException {
+    public static GameInformation playGame(Player player1, Player player2, Order order, Board board, Bag bag, TimePlayed timePlayed) throws InterruptedException {
         int opc,opc2,x;
         char y;
         Letter letter;
@@ -78,9 +78,6 @@ public class Main {
         boolean end = false;
         GameInformation gameInformation;
         LocalTime oldHour = LocalTime.now();
-        int oldSeconds = oldHour.getSecond();
-        int oldMinutes = oldHour.getMinute();
-        int oldHours = oldHour.getHour();
 
         do {
             for (Player turn : order.getPlayers()) {
@@ -95,7 +92,7 @@ public class Main {
                     if(bag.getTotal() == 0){
                         System.out.println(ANSI_RED + "AVISO:" + ANSI_YELLOW + " Bolsa vacía." + ANSI_RESET);
                     }
-/*-------------------------------------------------------------------------------------------------------------------------------------*/
+                    Thread.sleep(1000);
                     System.out.println(ANSI_GREEN + "Indique el número de la acción que desea realizar: " + ANSI_RESET);
                     System.out.println("1. Ingresar palabra.");
                     System.out.println("2. Cambiar fichas.");
@@ -136,6 +133,7 @@ public class Main {
                             turn.getHolder().show();
                             do{
                                 System.out.println("\nColoque cada letra que desea colocar: ");
+                                System.out.println("Si desea colocar un comodín simplemente coloque la letra con la que desea reemplazarlo.");
                                 System.out.println(ANSI_YELLOW + "(Letras ya presentes en el tablero se tomaran en cuenta automáticamente)");
                                 System.out.println(ANSI_GREEN + "En caso que desee realizar otra acción ingrese uno de los siguientes números:");
                                 System.out.println("1. Terminar y colocar palabra.");
@@ -144,7 +142,7 @@ public class Main {
                                 System.out.println("0. Volver al menú de opciones." + ANSI_RESET);
                                 token = read.next();
                                 if(Objects.equals(token,"0")){
-                                    turn.getHolder().getHold().addAll(word.getHold());
+                                    turn.getHolder().takeEverythingBack(word);
                                     System.out.println("Saliendo al menú de opciones.");
                                 }
                                 else if(Objects.equals(token,"1")){
@@ -152,7 +150,7 @@ public class Main {
                                     toPut.getHold().addAll(word.getHold());
 
                                     //Función para colocar palabra en la tabla;
-                                    if (writer.write(toPut, x-1, y - 65)) {
+                                    if (writer.write(toPut, x-1, y - 65, initialLettersNeeded)) {
                                         int newScore = writer.getScore();
                                         board = writer.getBoard();
                                         board.show();
@@ -168,7 +166,7 @@ public class Main {
                                     else{
                                         board.show();
                                         writer.setBoard(board);
-                                        turn.getHolder().getHold().addAll(word.getHold());
+                                        turn.getHolder().takeEverythingBack(word);
                                         word = new Word();
                                         turn.getHolder().show();
                                         word.show();
@@ -178,7 +176,7 @@ public class Main {
                                     turn.getHolder().backtrack(word);
                                 }
                                 else if(Objects.equals(token,"3")){
-                                    turn.getHolder().restartSelection(word);
+                                    turn.getHolder().takeEverythingBack(word);
                                     word = new Word();
                                 }
                                 else if((letter = turn.getHolder().takeLetter(token))!=null){
@@ -194,6 +192,7 @@ public class Main {
                             String change;
                             do {
                                 System.out.println("\nEscriba la letra de la ficha que desea cambiar: ");
+                                System.out.println("Si desea intercambiar un comodín se recomienda copiar y pegar la carita feliz para evitar confuciones.");
                                 System.out.println(ANSI_GREEN + "En caso que desee realizar otra acción ingrese uno de los siguientes números:");
                                 System.out.println("1. Terminar y realizar cambio de fichas.");
                                 System.out.println("2. Retroceder selección.");
@@ -202,7 +201,7 @@ public class Main {
                                 System.out.println("0. Volver al menú de opciones." + ANSI_RESET);
                                 change = read.next();
                                 if(Objects.equals(change, "0")) {
-                                    turn.getHolder().getHold().addAll(exchange.getHold());
+                                    turn.getHolder().takeEverythingBack(exchange);
                                     System.out.println("Saliendo al menú de opciones.");
                                 }
                                 else if(Objects.equals(change, "1")){
@@ -213,15 +212,14 @@ public class Main {
                                         bag.fillBag(exchange.getHold());
                                         turn.getHolder().finishExchange(bag, exchange.getHoldSize());
                                         out = true;
-                                    }catch (EmptyArrayException e){
-                                        System.out.println(e.getMessage());
+                                    }catch (EmptyArrayException _){
                                     }
                                 }
                                 else if(Objects.equals(change, "2")){
                                     turn.getHolder().backtrack(exchange);
                                 }
                                 else if(Objects.equals(change, "3")){
-                                    turn.getHolder().restartSelection(exchange);
+                                    turn.getHolder().takeEverythingBack(exchange);
                                     exchange = new Exchange();
                                 }
                                 else if(Objects.equals(change,"4")){
@@ -241,37 +239,45 @@ public class Main {
                             break;
 
                         default:
-                            System.out.println("ERROR. número ingresado fuera de los parámetros indicados.");
+                            System.out.println(ANSI_RED + "ERROR. número ingresado fuera de los parámetros indicados." + ANSI_RESET);
                             break;
                     }
                 }
                 if(turn.getHolder().getHoldSize() == 0 || end){break;}
             }
 
-
             LocalTime newHour = LocalTime.now();
-            int newSeconds = newHour.getSecond();
-            int newMinutes = newHour.getMinute();
-            int newHours = newHour.getHour();
-            GameTimer timer = new GameTimer(oldSeconds, oldMinutes, oldHours, newSeconds, newMinutes, newHours);
-            timer.calculateFinalTimer();
-            TimePlayed totalTimePlayed = new TimePlayed(timer.);
-            gameInformation = new GameInformation(bag, false, player2, player1, board, order);
+            GameTimer timer = new GameTimer(0,0,0,0,0,0);
+            LocalTime newTimePlayed = timer.calculateDiference(oldHour, newHour);
+            int newSeconds = newTimePlayed.getSecond() + timePlayed.getSeconds();
+            int newMinutes = newTimePlayed.getMinute() + timePlayed.getMinutes();
+            int newHours = newTimePlayed.getHour() + timePlayed.getHours();
+            TimePlayed totalTimePlayed = new TimePlayed(newHours, newMinutes, newSeconds);
+
+            gameInformation = new GameInformation(bag, false, player2, player1, board, order, totalTimePlayed);
+
 
         }while((player1.getHolder().getHoldSize() != 0 && player2.getHolder().getHoldSize() != 0) && !end);
         if(end){
             return gameInformation;
         }
         else{
+            System.out.println(ANSI_CYAN + "Score del jugador " + player1.getAlias() +  ": " + ANSI_RESET + player1.getScore());
+            System.out.println(ANSI_CYAN + "Score del jugador " + player2.getAlias() +  ": " + ANSI_RESET + player2.getScore());
+            Thread.sleep(2000);
             if(player1.getScore() > player2.getScore()){
                 player1.setWinner(true);
+                System.out.println(ANSI_YELLOW + "¡¡¡¡¡El ganador fue: " + player1.getAlias() + "!!!!!");
+                System.out.println("¡¡¡¡¡¡¡" + ANSI_RED + "F" + ANSI_YELLOW + "E" + ANSI_CYAN + "L" + ANSI_PURPLE + "I" + ANSI_WHITE + "C" + ANSI_YELLOW + "I" + ANSI_RED + "D" + ANSI_GREEN +"A" + ANSI_CYAN + "D" + ANSI_YELLOW + "E" + ANSI_GREEN + "S" + ANSI_RESET + "!!!!!!!!!");
             }
             else if(player1.getScore() < player2.getScore()){
                 player2.setWinner(true);
+                System.out.println(ANSI_YELLOW + "¡¡¡¡¡El ganador fue: " + player2.getAlias() + "!!!!!");
             }
             else{
                 player1.setWinner(true);
                 player2.setWinner(true);
+                System.out.println(ANSI_YELLOW + "Empate. ");
             }
             return gameInformation;
         }
@@ -331,6 +337,7 @@ public class Main {
 
         //Variables del juego
         Board board;
+        TimePlayed generatedTimePlayed;
         Bag bag;
         Order order = new Order();
         User user1 = null, user2 = null, newUser = null;
@@ -462,10 +469,12 @@ public class Main {
                     player1 = new Player(user1.getAlias(), 0, bag.fillNewHolder(initialLettersNeeded), false);
                     player2 = new Player(user2.getAlias(),0, bag.fillNewHolder(initialLettersNeeded), false);
                     board = new Board();
+                    generatedTimePlayed = new TimePlayed(0,0,0);
+
 
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
-                    gamePlayed = playGame(player1, player2, order, board, bag);
+                    gamePlayed = playGame(player1, player2, order, board, bag, generatedTimePlayed);
                     if(!gamePlayed.isGameFinished()) {
                         gamesInProgress.add(gamePlayed);
                         JsonGamesHandler.writeToJson(gamesInProgress);
@@ -485,8 +494,10 @@ public class Main {
                     order = foundedGame.getGameOrder();
                     board = foundedGame.getGameBoard();
                     bag = foundedGame.getGameBag();
+                    generatedTimePlayed = foundedGame.getGameTimePlayed();
+                    gamesInProgress.remove(foundedGame);
 
-                    gamePlayed = playGame(player1, player2, order, board, bag);
+                    gamePlayed = playGame(player1, player2, order, board, bag, generatedTimePlayed);
                     if(!gamePlayed.isGameFinished()) {
                         gamesInProgress.add(gamePlayed);
                         JsonGamesHandler.writeToJson(gamesInProgress);

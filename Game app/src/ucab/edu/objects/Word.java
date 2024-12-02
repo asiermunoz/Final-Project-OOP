@@ -1,4 +1,5 @@
 package ucab.edu.objects;
+
 import static ucab.edu.objects.Color.*;
 
 public class Word extends LettersHold{

@@ -1,5 +1,7 @@
 package ucab.edu.objects;
 
+import java.sql.Time;
+
 public class GameInformation {
     private Bag gameBag;
     private Board gameBoard;
@@ -7,14 +9,16 @@ public class GameInformation {
     private Player gamePlayer2;
     private boolean gameFinished;
     private Order gameOrder;
+    private TimePlayed gameTimePlayed;
 
-    public GameInformation(Bag gameBag, boolean gameFinished, Player gamePlayer2, Player gamePlayer1, Board gameBoard, Order gameOrder) {
+    public GameInformation(Bag gameBag, boolean gameFinished, Player gamePlayer2, Player gamePlayer1, Board gameBoard, Order gameOrder, TimePlayed gameTimePlayed) {
         this.gameBag = gameBag;
         this.gameFinished = gameFinished;
         this.gamePlayer2 = gamePlayer2;
         this.gamePlayer1 = gamePlayer1;
         this.gameBoard = gameBoard;
         this.gameOrder = gameOrder;
+        this.gameTimePlayed = gameTimePlayed;
     }
 
     public Bag getGameBag() {
@@ -60,6 +64,10 @@ public class GameInformation {
     public Order getGameOrder() { return gameOrder; }
 
     public void setGameOrder(Order gameOrder) { this.gameOrder = gameOrder; }
+
+    public TimePlayed getGameTimePlayed() { return gameTimePlayed; }
+
+    public void setGameTimePlayed(TimePlayed gameTimePlayed) { this.gameTimePlayed = gameTimePlayed; }
 
     public String getPlayer1Alias() { return gamePlayer1.getAlias(); }
 

@@ -1,5 +1,6 @@
 package ucab.edu.objects;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static ucab.edu.objects.Color.*;
@@ -7,7 +8,7 @@ import static ucab.edu.objects.Color.*;
 public abstract class Rotation {
     protected Board board;
     protected int score;
-    protected int scrabbleValue = 50;
+    protected Bonus bonus = new Bonus();
 
     public Rotation(Board board) {
         this.board = board;
@@ -32,46 +33,117 @@ public abstract class Rotation {
     public void transferBoard(Board copy) {
         for (int i = 0; i < board.getLength(); i++){
             for(int j = 0; j < board.getLength(); j++){
-                if (!Objects.equals(copy.getTable()[i][j].letter.getLetter(), "  ")) {
-                    this.board.getTable()[i][j].letter = copy.getTable()[i][j].letter;
+                if (!Objects.equals(board.getTable()[i][j].letter.getLetter(), "  ")) {
+                    copy.getTable()[i][j].letter = board.getTable()[i][j].letter;
                 }
             }
         }
     }
 
-    public void scrabbleBonus() throws InterruptedException {
-        System.out.println("¡¡¡¡¡¡¡" + ANSI_RED + "S" + ANSI_YELLOW + "C" + ANSI_CYAN + "R" + ANSI_PURPLE + "A" + ANSI_WHITE + "B" + ANSI_YELLOW + "B" + ANSI_RED + "L" + ANSI_GREEN +"E " + ANSI_RESET +" conseguido!!!!!!!!! +50 puntos");
-        Thread.sleep(2000);
-        score = score + scrabbleValue;
-    }
-
-    public void doubleWordBonus(int doubleWordBoost) throws InterruptedException {
-        System.out.println(ANSI_CYAN + "Se ha colocado una pieza en una casilla doble palabra.");
-        System.out.println("Se multiplicará la palabra formada x2");
-        Thread.sleep(1500);
-        for(int i = 0; i<doubleWordBoost; i++){
-            score = score * 2;
+    public boolean reviseCollision(Board copy, int y, int x){
+        for (int i = 0; i < board.getLength(); i++){
+            for(int j = 0; j < board.getLength(); j++){
+                if(!Objects.equals(board.getTable()[i][j].letter.getLetter(), "  ") && !copy.getTable()[i][j].marked){
+                    if((i == y+1 && j == x) || (i==y-1 && j == x) || (i == y && j == x+1) || (i == y && j == x-1)){
+                        return true;
+                    }
+                }
+            }
         }
+        return false;
     }
 
-    public void tripleWordBonus(int tripleWordBoost) throws InterruptedException {
-        System.out.println(ANSI_CYAN + "Se ha colocado una pieza en una casilla triple palabra.");
-        System.out.println("Se multiplicará la palabra formada x3");
-        Thread.sleep(1500);
-        for(int i = 0; i<tripleWordBoost; i++){
-            score = score * 3;
+    public boolean readHorizontal(Board copy){
+        boolean truth = true;
+        boolean enter = false;
+        int copyScore = 0;
+        ArrayList<Letter> letters = new ArrayList<>();
+        for (int i = 0; i<copy.getLength(); i++){
+            for(int j = 0; j<copy.getLength(); j++){
+                if (!Objects.equals(copy.getTable()[i][j].letter.getLetter(), "  ")) {
+                    letters.add(copy.getTable()[i][j].letter);
+                    copyScore = copyScore + copy.getTable()[i][j].getValue();
+                    if(copy.getTable()[i][j].marked){
+                        enter = true;
+                    }
+                }
+                else{
+                    if((letters.size() > 1 && enter)){
+                        if(readWord(letters)){
+                            this.score = this.score + copyScore;
+                            truth = true;
+                            letters = new ArrayList<>();
+                            copyScore = 0;
+                        }
+                        else{
+                            truth = false;
+                        }
+                    }
+                    else{
+                        copyScore = 0;
+                        letters = new ArrayList<>();
+                        enter = false;
+                    }
+                }
+            }
         }
+        return truth;
     }
 
-    public void putSimpleCharacter(int y, int x, Word word, Board copy){
-        copy.getTable()[y][x].letter.setLetter(word.hold.getFirst().getLetter() + " ");
-        copy.getTable()[y][x].letter.setValue(word.hold.removeFirst().getValue());
+    public boolean readVertical(Board copy){
+        boolean truth = true;
+        boolean enter = false;
+        int copyScore = 0;
+        ArrayList<Letter> letters = new ArrayList<>();
+        for (int i = 0; i<copy.getLength(); i++){
+            for(int j = 0; j<copy.getLength(); j++){
+                if (!Objects.equals(copy.getTable()[j][i].letter.getLetter(), "  ")) {
+                    letters.add(copy.getTable()[j][i].letter);
+                    copyScore = copyScore + copy.getTable()[j][i].getValue();
+                    if(copy.getTable()[j][i].marked){
+                        enter = true;
+                    }
+                }
+                else{
+                    if((letters.size() > 1 && enter)){
+                        if(readWord(letters)){
+                            this.score = this.score + copyScore;
+                            truth = true;
+                            letters = new ArrayList<>();
+                        }
+                        else{
+                            truth = false;
+                        }
+                    }
+                    else{
+                        copyScore = 0;
+                        letters = new ArrayList<>();
+                        enter = false;
+                    }
+                }
+            }
+        }
+        return truth;
     }
 
-    public void putDoubleCharacter(int y, int x, Word word, Board copy){
-        copy.getTable()[y][x].letter = word.hold.removeFirst();
+    public boolean readBoard(Board copy) {
+        boolean truth;
+        truth = readHorizontal(copy);
+        if(truth){
+            truth = readVertical(copy);
+        }
+        return truth;
     }
 
-    public abstract boolean read();
-    public abstract boolean write(Word word, int x, int y);
+    public boolean readWord(ArrayList<Letter> letters){
+        StringBuilder word = new StringBuilder();
+        for (Letter letter : letters) {
+            word.append(letter.getLetter().toLowerCase());
+        }
+        System.out.println(word);
+        return new WordChecker().checkWord(String.valueOf(word));
+    }
+
+    public abstract boolean initialRead(Board copy, int coordinate);
+    public abstract boolean write(Word word, int x, int y,  int initialLettersNeeded);
 }
