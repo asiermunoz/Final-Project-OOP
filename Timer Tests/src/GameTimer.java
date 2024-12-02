@@ -1,5 +1,3 @@
-package ucab.edu.objects;
-
 public class GameTimer {
 
     private long oldSeconds = 0;
@@ -61,4 +59,3 @@ public class GameTimer {
         System.out.println("Timer: " + finalHour + ":" + finalMinutes + ":" + finalSeconds);
     }
 }
-

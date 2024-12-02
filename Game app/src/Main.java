@@ -102,16 +102,6 @@ public class Main {
 
                     switch (opc) {
                         case 0:
-                            Date timer2 = new Date();
-                            System.out.println(timer2);
-                            long diferencia = timer2.getTime() - timer.getTime();
-                            long Totalseconds = diferencia / 1000;
-                            long hour = Totalseconds / 3600;
-                            long minutes = (Totalseconds % 3600) / 60;
-                            long seconds = Totalseconds % 60;
-                            System.out.println("DIFERENCIA: " + hour + ":" + minutes + ":" + seconds);
-
-
                             end = endGame(order, turn);
                             out = end;
                             break;
