@@ -1,5 +1,8 @@
 package ucab.edu.objects;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 public class GameTimer {
 
     private int oldSeconds = 0;
@@ -56,6 +59,17 @@ public class GameTimer {
             finalHour += calculateHourExtra;
 
         }
+    }
+
+    public LocalTime calculateDiference(LocalTime oldTime, LocalTime newTime){
+        Duration durationBetweenBothTimes = Duration.between(oldTime, newTime);
+        long hours = durationBetweenBothTimes.toHours();
+        long minutes = durationBetweenBothTimes.toMinutesPart();
+        long seconds = durationBetweenBothTimes.toSecondsPart();
+        return LocalTime.of((int) hours, (int) minutes, (int) seconds);
+
+
+
     }
     public void showFinalTimer(){
         System.out.println("Timer: " + finalHour + ":" + finalMinutes + ":" + finalSeconds);

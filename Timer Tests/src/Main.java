@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.Date;
 
 public class Main {
@@ -30,6 +31,8 @@ public class Main {
         GameTimer clock = new GameTimer(59,0,0,2,0,0);
         clock.calculateFinalTimer();
         clock.showFinalTimer();
+        LocalTime hour = LocalTime.now();
+        System.out.println(hour);
 
 
     }
