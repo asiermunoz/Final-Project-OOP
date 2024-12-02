@@ -140,7 +140,6 @@ public abstract class Rotation {
         for (Letter letter : letters) {
             word.append(letter.getLetter().toLowerCase());
         }
-        System.out.println(word);
         return new WordChecker().checkWord(String.valueOf(word));
     }
 
