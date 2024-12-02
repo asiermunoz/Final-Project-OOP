@@ -354,6 +354,14 @@ public class Main {
             gamesInProgress = new LinkedList<GameInformation>();
         }
 
+        if(usersLinkedList == null) {
+            usersLinkedList = new LinkedList<User>();
+        }
+
+        if(finishedGames == null) {
+            finishedGames = new LinkedList<GameInformation>();
+        }
+
 
         //MENU de ingreso
         System.out.println(ANSI_YELLOW+"MENU DE INGRESO DE USUARIOS:" + ANSI_RESET);
