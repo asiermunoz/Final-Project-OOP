@@ -8,6 +8,7 @@ import ucab.edu.objects.users.exceptions.InvalidAliasException;
 import ucab.edu.objects.users.exceptions.InvalidEmailException;
 
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.*;
 
 import static ucab.edu.objects.Color.*;
@@ -76,6 +77,10 @@ public class Main {
         boolean out;
         boolean end = false;
         GameInformation gameInformation;
+        LocalTime oldHour = LocalTime.now();
+        int oldSeconds = oldHour.getSecond();
+        int oldMinutes = oldHour.getMinute();
+        int oldHours = oldHour.getHour();
 
         do {
             for (Player turn : order.getPlayers()) {
@@ -83,8 +88,6 @@ public class Main {
                 System.out.println();
                 System.out.println("\n" + ANSI_WHITE_BACKGROUND + ANSI_BLACK + "  Es el turno de: " + turn.getAlias() + "  "+ ANSI_RESET);
                 Thread.sleep(1000);
-                Date timer = new Date();
-                System.out.println(timer);
                 while(!out){
                     board.show();
                     turn.getHolder().show();
@@ -244,6 +247,15 @@ public class Main {
                 }
                 if(turn.getHolder().getHoldSize() == 0 || end){break;}
             }
+
+
+            LocalTime newHour = LocalTime.now();
+            int newSeconds = newHour.getSecond();
+            int newMinutes = newHour.getMinute();
+            int newHours = newHour.getHour();
+            GameTimer timer = new GameTimer(oldSeconds, oldMinutes, oldHours, newSeconds, newMinutes, newHours);
+            timer.calculateFinalTimer();
+            TimePlayed totalTimePlayed = new TimePlayed(timer.);
             gameInformation = new GameInformation(bag, false, player2, player1, board, order);
 
         }while((player1.getHolder().getHoldSize() != 0 && player2.getHolder().getHoldSize() != 0) && !end);

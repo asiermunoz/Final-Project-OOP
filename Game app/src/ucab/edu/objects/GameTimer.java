@@ -2,17 +2,17 @@ package ucab.edu.objects;
 
 public class GameTimer {
 
-    private long oldSeconds = 0;
-    private long oldMinutes = 0;
-    private long oldHours = 0;
-    private long newSeconds = 0;
-    private long newMinutes = 0;
-    private long newHours = 0;
-    private long finalSeconds = newSeconds + oldSeconds;
-    private long finalMinutes = newMinutes + oldMinutes;
-    private long finalHour = newHours + oldHours;
+    private int oldSeconds = 0;
+    private int oldMinutes = 0;
+    private int oldHours = 0;
+    private int newSeconds = 0;
+    private int newMinutes = 0;
+    private int newHours = 0;
+    private int finalSeconds = newSeconds + oldSeconds;
+    private int finalMinutes = newMinutes + oldMinutes;
+    private int finalHour = newHours + oldHours;
 
-    public GameTimer(long oldSeconds, long oldMinutes, long oldHours, long newSeconds, long newMinutes, long newHours) {
+    public GameTimer(int oldSeconds, int oldMinutes, int oldHours, int newSeconds, int newMinutes, int newHours) {
         this.oldSeconds = oldSeconds;
         this.oldMinutes = oldMinutes;
         this.oldHours = oldHours;
@@ -23,25 +23,25 @@ public class GameTimer {
 
     //GETTER Y SETTER
     public long getOldSeconds() {        return oldSeconds;    }
-    public void setOldSeconds(long oldSeconds) {        this.oldSeconds = oldSeconds;    }
+    public void setOldSeconds(int oldSeconds) {        this.oldSeconds = oldSeconds;    }
     public long getOldMinutes() {        return oldMinutes;    }
-    public void setOldMinutes(long oldMinutes) {        this.oldMinutes = oldMinutes;    }
+    public void setOldMinutes(int oldMinutes) {        this.oldMinutes = oldMinutes;    }
     public long getOldHours() {        return oldHours;    }
-    public void setOldHours(long oldHours) {        this.oldHours = oldHours;    }
+    public void setOldHours(int oldHours) {        this.oldHours = oldHours;    }
     public long getNewSeconds() {        return newSeconds;    }
-    public void setNewSeconds(long newSeconds) {        this.newSeconds = newSeconds;    }
+    public void setNewSeconds(int newSeconds) {        this.newSeconds = newSeconds;    }
     public long getNewMinutes() {        return newMinutes;    }
-    public void setNewMinutes(long newMinutes) {        this.newMinutes = newMinutes;    }
+    public void setNewMinutes(int newMinutes) {        this.newMinutes = newMinutes;    }
     public long getNewHours() {        return newHours;    }
-    public void setNewHours(long newHours) {        this.newHours = newHours;    }
+    public void setNewHours(int newHours) {        this.newHours = newHours;    }
     public long getFinalSeconds() {        return finalSeconds;    }
-    public void setFinalSeconds(long finalSeconds) {        this.finalSeconds = finalSeconds;    }
+    public void setFinalSeconds(int finalSeconds) {        this.finalSeconds = finalSeconds;    }
     public long getFinalMinutes() {        return finalMinutes;    }
-    public void setFinalMinutes(long finalMinutes) {        this.finalMinutes = finalMinutes;    }
+    public void setFinalMinutes(int finalMinutes) {        this.finalMinutes = finalMinutes;    }
     public long getFinalHour() {        return finalHour;    }
-    public void setFinalHour(long finalHour) {        this.finalHour = finalHour;    }
+    public void setFinalHour(int finalHour) {        this.finalHour = finalHour;    }
 
-    void calculateFinalTimer() {
+    public void calculateFinalTimer() {
         int calculateMinutesExtra = 0;
         if ((newSeconds + oldSeconds) > 59) {
             finalSeconds = (newSeconds + oldSeconds) % 60;
@@ -57,7 +57,7 @@ public class GameTimer {
 
         }
     }
-    void showFinalTimer(){
+    public void showFinalTimer(){
         System.out.println("Timer: " + finalHour + ":" + finalMinutes + ":" + finalSeconds);
     }
 }
