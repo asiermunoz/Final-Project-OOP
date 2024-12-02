@@ -97,6 +97,9 @@ public class Horizontal extends Rotation{
             return false;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        } catch (InexistentWord e) {
+            System.out.printf(e.getMessage());
+            return false;
         }
     }
 }

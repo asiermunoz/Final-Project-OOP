@@ -40,8 +40,7 @@ public class Main {
         System.out.println(ANSI_YELLOW + "Ingrese el número de la acción que desee realizar:" + ANSI_RESET);
         System.out.println("1. Jugar nueva Partida.");
         System.out.println("2. Continuar partida anterior.");
-        System.out.println("3. Mostrar lista total de jugadores.");
-        System.out.println("4. Mostrar estadística de jugadores.");
+        System.out.println("3. Mostrar estadística de jugadores.");
         System.out.println("0. Salir.");
         return read.nextInt();
     }
@@ -508,8 +507,20 @@ public class Main {
 
                     break;
                 case 3:
-                    break;
-                case 4:
+                    if(!gameAlreadyCreated) {
+                        System.out.println("No existen partidas creadas con estos jugadores, por lo tanto no hay estadisticas de ellos, inicie un nuevo juego.");
+                        continue;
+                    }
+                    System.out.println("Jugador 1");
+                    System.out.println("Nombre: "+foundedGame.getPlayer1Alias());
+                    System.out.println("Score: "+foundedGame.getGamePlayer1().getScore());
+                    System.out.println("");
+                    System.out.println("Jugador 2");
+                    System.out.println("Nombre: "+foundedGame.getPlayer2Alias());
+                    System.out.println("Score: "+foundedGame.getGamePlayer2().getScore());
+                    System.out.println("");
+                    System.out.println("Tiempo total jugado: ");
+                    foundedGame.getGameTimePlayed().printTime();
                     break;
                 case 0:
                     System.out.println(ANSI_BLUE + "Saliendo del juego...");
