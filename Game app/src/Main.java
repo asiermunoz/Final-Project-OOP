@@ -354,10 +354,6 @@ public class Main {
             gamesInProgress = new LinkedList<GameInformation>();
         }
 
-        if(usersLinkedList == null) {
-            usersLinkedList = new LinkedList<User>();
-        }
-
         if(finishedGames == null) {
             finishedGames = new LinkedList<GameInformation>();
         }
