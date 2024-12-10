@@ -29,6 +29,7 @@ public class RegisterUsers{
             //LISTA DE USUARIOS REGISTRADOS
             int listIndex = 0;
 
+
             if(listOfUsers == null) {
                 listOfUsers = new LinkedList<User>();
                 System.out.println("LINKED LIST IS EMPTY.");
