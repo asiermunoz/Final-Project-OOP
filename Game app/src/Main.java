@@ -563,14 +563,12 @@ public class Main {
                         System.out.println("No existen partidas creadas con estos jugadores, por lo tanto no hay estadisticas de ellos, inicie un nuevo juego.");
                         continue;
                     }
+                    System.out.println("Referencia:");
+                    System.out.println("Nombre, Score, gano?");
                     System.out.println("Jugador 1");
-                    System.out.println("Nombre: "+foundedGame.getPlayer1Alias());
-                    System.out.println("Score: "+foundedGame.getGamePlayer1().getScore());
-                    System.out.println("");
+                    System.out.println(foundedGame.getPlayer1Alias()+", "+foundedGame.getGamePlayer1().getScore()+", "+foundedGame.getGamePlayer1().isWinner());
                     System.out.println("Jugador 2");
-                    System.out.println("Nombre: "+foundedGame.getPlayer2Alias());
-                    System.out.println("Score: "+foundedGame.getGamePlayer2().getScore());
-                    System.out.println("");
+                    System.out.println(foundedGame.getPlayer2Alias()+", "+foundedGame.getGamePlayer2().getScore()+", "+foundedGame.getGamePlayer2().isWinner());
                     System.out.println("Tiempo total jugado: ");
                     foundedGame.getGameTimePlayed().printTime();
                     break;
