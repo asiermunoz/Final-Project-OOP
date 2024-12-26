@@ -1,7 +1,5 @@
 import ucab.edu.objects.*;
-import ucab.edu.objects.jsonHandlers.JsonFinishedGamesHandler;
-import ucab.edu.objects.jsonHandlers.JsonGamesHandler;
-import ucab.edu.objects.jsonHandlers.JsonUserHandler;
+import ucab.edu.objects.jsonHandlers.*;
 import ucab.edu.objects.users.Email;
 import ucab.edu.objects.users.User;
 import ucab.edu.objects.users.exceptions.InvalidAliasException;
@@ -75,6 +73,8 @@ public class Main {
         Letter letter;
         boolean out;
         boolean end = false;
+        boolean finished = false;
+        int pastShifts = 0;
         GameInformation gameInformation;
         LocalTime oldHour = LocalTime.now();
 
@@ -112,7 +112,14 @@ public class Main {
                             //Coordenadas.
                             do{
                                 System.out.println("Ingrese el número de la coordenada x en donde va a iniciar su palabra.");
-                                x = read.nextInt();
+                                while(!read.hasNextInt()) {
+                                    read.next();
+                                    if(!read.hasNextInt()){
+                                        System.out.println(ANSI_RED + "ERROR. Aporte ingresado no corresponde con lo pedido." + ANSI_RESET);
+                                        System.out.println("Ingrese el número de la coordenada x en donde va a iniciar su palabra.");
+                                    }
+                                }
+                                x=read.nextInt();
                             }while(!board.verifyCoordinateX(x));
                             do{
                                 System.out.println("Ingrese la letra de la coordenada y en donde va a iniciar su palabra.");
@@ -126,7 +133,16 @@ public class Main {
                                 System.out.println("Indique el número de la forma en la que desea ingresar la palabra: ");
                                 System.out.println("1. Vertical ( | )");
                                 System.out.println("2. Horizontal ( - )");
-                                opc2 = read.nextByte();
+                                while(!read.hasNextByte()) {
+                                    read.next();
+                                    if(!read.hasNextByte()){
+                                        System.out.println(ANSI_RED + "ERROR. Aporte ingresado no corresponde con lo pedido." + ANSI_RESET);
+                                        System.out.println("Indique el número de la forma en la que desea ingresar la palabra: ");
+                                        System.out.println("1. Vertical ( | )");
+                                        System.out.println("2. Horizontal ( - )");
+                                    }
+                                }
+                                opc2=read.nextByte();
                             }while((writer = setWriter(opc2,board)) == null);
 
                             turn.getHolder().show();
@@ -160,6 +176,7 @@ public class Main {
                                         }
                                         turn.getHolder().show();
                                         Thread.sleep(2000);
+                                        turn.setPass(false);
                                         out = true;
                                     }
                                     else{
@@ -211,6 +228,7 @@ public class Main {
                                         bag.fillBag(exchange.getHold());
                                         turn.getHolder().finishExchange(bag, exchange.getHoldSize());
                                         out = true;
+                                        turn.setPass(false);
                                     }catch (EmptyArrayException _){
                                     }
                                 }
@@ -234,6 +252,7 @@ public class Main {
                             break;
 
                         case 3:
+                            turn.setPass(true);
                             out = true;
                             break;
 
@@ -242,7 +261,31 @@ public class Main {
                             break;
                     }
                 }
-                if(turn.getHolder().getHoldSize() == 0 || end){break;}
+
+                if(order.getFirstPlayer().isPass() && order.getLastPlayer().isPass()){
+                    System.out.println("\nSe han pasado 2 turnos seguidos.");
+                    System.out.println("¿Desea terminar la partida?");
+                    System.out.println("1. Sí");
+                    System.out.println("2. No");
+                    while(!read.hasNextInt()) {
+                        read.next();
+                        if(!read.hasNextInt()){
+                            System.out.println(ANSI_RED + "ERROR. Aporte ingresado no corresponde con lo pedido." + ANSI_RESET);
+                            System.out.println("Ingrese el número de la coordenada x en donde va a iniciar su palabra.");
+                        }
+                    }
+                    opc = read.nextInt();
+                    if(opc == 1){
+                    finished = true;
+                    end = true;
+                    break;
+                    }
+                }
+                if(turn.getHolder().getHoldSize() == 0){
+                    finished = true;
+                    end = true;
+                    break;
+                }
             }
 
             LocalTime newHour = LocalTime.now();
@@ -256,9 +299,11 @@ public class Main {
             gameInformation = new GameInformation(bag, false, player2, player1, board, order, totalTimePlayed);
 
 
-        }while((player1.getHolder().getHoldSize() != 0 && player2.getHolder().getHoldSize() != 0) && !end);
-        if(end){
-            return gameInformation;
+        }while(!end);
+        player1 = order.getFirstPlayer();
+        player2 = order.getLastPlayer();
+        if(!finished){
+            System.out.println("Guardando partida...");
         }
         else{
             System.out.println(ANSI_CYAN + "Score del jugador " + player1.getAlias() +  ": " + ANSI_RESET + player1.getScore());
@@ -271,15 +316,17 @@ public class Main {
             }
             else if(player1.getScore() < player2.getScore()){
                 player2.setWinner(true);
-                System.out.println(ANSI_YELLOW + "¡¡¡¡¡El ganador fue: " + player2.getAlias() + "!!!!!");
+                System.out.println(ANSI_YELLOW + "¡¡¡¡¡El ganador fue " + player2.getAlias() + "!!!!!");
             }
             else{
                 player1.setWinner(true);
                 player2.setWinner(true);
                 System.out.println(ANSI_YELLOW + "Empate. ");
             }
-            return gameInformation;
+            System.out.println();
         }
+        Thread.sleep(2000);
+        return gameInformation;
     }
 
     private static User logIn(int index){
@@ -477,7 +524,7 @@ public class Main {
 
                     //Establecer orden de jugadores
                     order.setNewOrder(player1,player2);
-                    gamePlayed = playGame(player1, player2, order, board, bag, generatedTimePlayed);
+                    gamePlayed = playGame(order.getFirstPlayer(), order.getLastPlayer(), order, board, bag, generatedTimePlayed);
                     if(!gamePlayed.isGameFinished()) {
                         gamesInProgress.add(gamePlayed);
                         JsonGamesHandler.writeToJson(gamesInProgress);
@@ -492,6 +539,7 @@ public class Main {
                         System.out.println("No existen partidas creadas con estos jugadores, inicie un nuevo juego.");
                         continue;
                     }
+                    assert foundedGame != null;
                     player1 = foundedGame.getGamePlayer1();
                     player2 = foundedGame.getGamePlayer2();
                     order = foundedGame.getGameOrder();
@@ -500,7 +548,7 @@ public class Main {
                     generatedTimePlayed = foundedGame.getGameTimePlayed();
                     gamesInProgress.remove(foundedGame);
 
-                    gamePlayed = playGame(player1, player2, order, board, bag, generatedTimePlayed);
+                    gamePlayed = playGame(order.getFirstPlayer(), order.getLastPlayer(), order, board, bag, generatedTimePlayed);
                     if(!gamePlayed.isGameFinished()) {
                         gamesInProgress.add(gamePlayed);
                         JsonGamesHandler.writeToJson(gamesInProgress);
