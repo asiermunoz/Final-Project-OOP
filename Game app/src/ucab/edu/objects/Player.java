@@ -5,6 +5,7 @@ public class Player {
     private int score;
     private Holder holder;
     private boolean winner;
+    private boolean pass;
 
     public Player(String alias, int score, Holder holder, boolean winner) {
         this.alias = alias;
@@ -45,4 +46,11 @@ public class Player {
         this.holder = holder;
     }
 
+    public boolean isPass() {
+        return pass;
+    }
+
+    public void setPass(boolean pass) {
+        this.pass = pass;
+    }
 }
