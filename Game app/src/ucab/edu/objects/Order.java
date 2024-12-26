@@ -10,6 +10,14 @@ public class Order {
         return players;
     }
 
+    public Player getFirstPlayer(){
+        return players.getFirst();
+    }
+
+    public Player getLastPlayer(){
+        return players.getLast();
+    }
+
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
