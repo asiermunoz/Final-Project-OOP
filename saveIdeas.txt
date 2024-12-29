@@ -1,0 +1,27 @@
+//MENU de ingreso
+        System.out.println(ANSI_YELLOW+"MENU DE INGRESO DE USUARIOS:" + ANSI_RESET);
+        for (User testuser : usersLinkedList) {
+            System.out.println("alias: " + testuser.getAlias() + ", email: " + testuser.getStringEmail());
+        }
+
+        for (int i = 1; i <= 2; i++){
+            newUser = logIn(i);
+
+            //Search newUser in the usersLinkedList exported in the Json file
+            for(int j = 0; j<usersLinkedList.size(); j++) {
+                if(newUser.equals(usersLinkedList.get(j))) {
+                    userFound = true;
+                    j = usersLinkedList.size();
+                }
+            }
+
+            //Validate newUser
+            if(userFound) {
+                if(i==1){ user1 = newUser; }
+                else { user2 = newUser; }
+                userFound = false;
+            } else {
+                System.out.println("El usuario "+i+" no ha sido encontrado, porfavor ingrese un usuario existente");
+                i-=1;
+            }
+        }

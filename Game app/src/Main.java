@@ -1,4 +1,5 @@
 import ucab.edu.objects.*;
+import ucab.edu.objects.controllers.MenuController;
 import ucab.edu.objects.jsonHandlers.*;
 import ucab.edu.objects.users.Email;
 import ucab.edu.objects.users.User;
@@ -329,39 +330,6 @@ public class Main {
         return gameInformation;
     }
 
-    private static User logIn(int index){
-        String alias, emailText;
-        Email email;
-        User user;
-
-        //Email Login
-        while(true) {
-            System.out.println("User "+index+" email: ");
-            emailText = read.next();
-            email = new Email(emailText);
-            try {
-                email.validateEmail();
-                break;
-            } catch (InvalidEmailException ex) {
-                ex.messageInvalidEmailException();
-            }
-        }
-
-        //Alias Login
-        while(true) {
-            System.out.println("User "+index+" alias: ");
-            alias = read.next();
-            user = new User(alias, email);
-            try {
-                user.validateAlias();
-                break;
-            } catch (InvalidAliasException ex) {
-                ex.messageInvalidAliasException();
-            }
-        }
-        return user;
-    }
-
 
     //MAIN
 
@@ -369,7 +337,6 @@ public class Main {
 
         //Variables de lectura de archivos
         boolean gameAlreadyCreated = false;
-        boolean userFound = false;
         LinkedList<User> usersLinkedList = new LinkedList<User>();
         LinkedList<GameInformation> gamesInProgress = new LinkedList<GameInformation>();
         LinkedList<GameInformation> finishedGames = new LinkedList<GameInformation>();
@@ -386,16 +353,21 @@ public class Main {
         TimePlayed generatedTimePlayed;
         Bag bag;
         Order order = new Order();
-        User user1 = null, user2 = null, newUser = null;
+        User user1 = null, user2 = null;
         int option;
         GameInformation gamePlayed;
         Player player1;
         Player player2;
 
+        //Variables MVC
+        MenuController menuController = new MenuController();
+        LinkedList<User> usersLogged;
+
         //Json Reading
         usersLinkedList = JsonUserHandler.readFromJson();
         gamesInProgress = JsonGamesHandler.readFromJson();
         finishedGames = JsonFinishedGamesHandler.readFromJson();
+
 
         if(gamesInProgress == null) {
             gamesInProgress = new LinkedList<GameInformation>();
@@ -406,35 +378,9 @@ public class Main {
         }
 
 
-        //MENU de ingreso
-        System.out.println(ANSI_YELLOW+"MENU DE INGRESO DE USUARIOS:" + ANSI_RESET);
-        for (User testuser : usersLinkedList) {
-            System.out.println("alias: " + testuser.getAlias() + ", email: " + testuser.getStringEmail());
-        }
-
-        for (int i = 1; i <= 2; i++){
-            newUser = logIn(i);
-
-            //Search newUser in the usersLinkedList exported in the Json file
-            for(int j = 0; j<usersLinkedList.size(); j++) {
-                if(newUser.equals(usersLinkedList.get(j))) {
-                    userFound = true;
-                    j = usersLinkedList.size();
-                }
-            }
-
-            //Validate newUser
-            if(userFound) {
-                if(i==1){ user1 = newUser; }
-                else { user2 = newUser; }
-                userFound = false;
-            } else {
-                System.out.println("El usuario "+i+" no ha sido encontrado, porfavor ingrese un usuario existente");
-                i-=1;
-            }
-        }
-
-
+        usersLogged = menuController.usersLogIn(usersLinkedList);
+        user1 = usersLogged.get(0);
+        user2 = usersLogged.get(1);
 
         System.out.println(ANSI_GREEN+"\nBienvenidos " + user1.getAlias() + " y " + user2.getAlias() + ANSI_RESET);
         Thread.sleep(2000);
