@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static ucab.edu.objects.Color.ANSI_RESET;
 import static ucab.edu.objects.Color.ANSI_YELLOW;
 
-public class MenuView {
+public class LoginMenuView {
     private Scanner read = new Scanner(System.in);
 
     public void showUsersMenu(LinkedList<User> listOfRegisteredUsers) {

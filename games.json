@@ -1,8 +1,525 @@
 [
   {
     "gameBag": {
-      "total": 0,
-      "letters": []
+      "total": 86,
+      "letters": [
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "A",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "B",
+          "value": 4,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "B",
+          "value": 4,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "C",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "C",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "C",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "C",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "CH",
+          "value": 8,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "D",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "D",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "D",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "D",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "D",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 12,
+          "letter": "E",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "F",
+          "value": 5,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "G",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "G",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "H",
+          "value": 5,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "H",
+          "value": 5,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "I",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "I",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "I",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "I",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "I",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "J",
+          "value": 10,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "L",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "L",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "L",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "L",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "M",
+          "value": 3,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "N",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "N",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "N",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "N",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "N",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "Ñ",
+          "value": 10,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 9,
+          "letter": "O",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "P",
+          "value": 4,
+          "joker": false
+        },
+        {
+          "amount": 2,
+          "letter": "P",
+          "value": 4,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "Q",
+          "value": 8,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "R",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "R",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "R",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "RR",
+          "value": 8,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "S",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "S",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "S",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "S",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 6,
+          "letter": "S",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "T",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "T",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "T",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 4,
+          "letter": "T",
+          "value": 2,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "U",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "U",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "U",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "U",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 5,
+          "letter": "U",
+          "value": 1,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "V",
+          "value": 4,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "X",
+          "value": 10,
+          "joker": false
+        },
+        {
+          "amount": 1,
+          "letter": "Z",
+          "value": 10,
+          "joker": false
+        }
+      ]
     },
     "gameBoard": {
       "length": 15,
@@ -131,8 +648,8 @@
           },
           {
             "letter": {
-              "letter": "J",
-              "value": 10,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -232,8 +749,8 @@
           },
           {
             "letter": {
-              "letter": "Q",
-              "value": 8,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -254,8 +771,8 @@
           },
           {
             "letter": {
-              "letter": "G",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -265,8 +782,8 @@
           },
           {
             "letter": {
-              "letter": "U",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -276,8 +793,8 @@
           },
           {
             "letter": {
-              "letter": "I",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -287,8 +804,8 @@
           },
           {
             "letter": {
-              "letter": "S",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -298,8 +815,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -331,8 +848,8 @@
           },
           {
             "letter": {
-              "letter": "F",
-              "value": 5,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -388,8 +905,8 @@
           },
           {
             "letter": {
-              "letter": "C",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -399,8 +916,8 @@
           },
           {
             "letter": {
-              "letter": "U",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -410,8 +927,8 @@
           },
           {
             "letter": {
-              "letter": "R",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -421,8 +938,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -498,8 +1015,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -533,8 +1050,8 @@
           },
           {
             "letter": {
-              "letter": "H",
-              "value": 5,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -544,8 +1061,8 @@
           },
           {
             "letter": {
-              "letter": "I",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -555,8 +1072,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -566,8 +1083,8 @@
           },
           {
             "letter": {
-              "letter": "L",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -588,8 +1105,8 @@
           },
           {
             "letter": {
-              "letter": "Y",
-              "value": 5,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -610,8 +1127,8 @@
           },
           {
             "letter": {
-              "letter": "V",
-              "value": 4,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -632,8 +1149,8 @@
           },
           {
             "letter": {
-              "letter": "S",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -643,8 +1160,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -654,8 +1171,8 @@
           },
           {
             "letter": {
-              "letter": "D",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -665,8 +1182,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -722,7 +1239,7 @@
           },
           {
             "letter": {
-              "letter": "D",
+              "letter": "  ",
               "value": 0,
               "joker": false
             },
@@ -766,8 +1283,8 @@
           },
           {
             "letter": {
-              "letter": "C",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -777,8 +1294,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -788,8 +1305,8 @@
           },
           {
             "letter": {
-              "letter": "P",
-              "value": 4,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -799,8 +1316,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -832,8 +1349,8 @@
           },
           {
             "letter": {
-              "letter": "S",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -878,8 +1395,8 @@
           },
           {
             "letter": {
-              "letter": "S",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -889,8 +1406,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -900,8 +1417,8 @@
           },
           {
             "letter": {
-              "letter": "D",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -911,8 +1428,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -966,8 +1483,8 @@
           },
           {
             "letter": {
-              "letter": "N",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1045,8 +1562,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1078,8 +1595,8 @@
           },
           {
             "letter": {
-              "letter": "Ñ",
-              "value": 10,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -1122,8 +1639,8 @@
           },
           {
             "letter": {
-              "letter": "M",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1133,8 +1650,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1144,8 +1661,8 @@
           },
           {
             "letter": {
-              "letter": "LL",
-              "value": 8,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -1155,8 +1672,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1190,8 +1707,8 @@
           },
           {
             "letter": {
-              "letter": "P",
-              "value": 4,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1212,8 +1729,8 @@
           },
           {
             "letter": {
-              "letter": "X",
-              "value": 10,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -1234,8 +1751,8 @@
           },
           {
             "letter": {
-              "letter": "C",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1245,8 +1762,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1256,8 +1773,8 @@
           },
           {
             "letter": {
-              "letter": "CH",
-              "value": 8,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[47m",
@@ -1267,8 +1784,8 @@
           },
           {
             "letter": {
-              "letter": "I",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1278,8 +1795,8 @@
           },
           {
             "letter": {
-              "letter": "N",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1289,8 +1806,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1322,8 +1839,8 @@
           },
           {
             "letter": {
-              "letter": "G",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1346,8 +1863,8 @@
         [
           {
             "letter": {
-              "letter": "B",
-              "value": 4,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1357,8 +1874,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1368,8 +1885,8 @@
           },
           {
             "letter": {
-              "letter": "L",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -1379,8 +1896,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1390,8 +1907,8 @@
           },
           {
             "letter": {
-              "letter": "S",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1434,8 +1951,8 @@
           },
           {
             "letter": {
-              "letter": "R",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -1456,8 +1973,8 @@
           },
           {
             "letter": {
-              "letter": "N",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1489,8 +2006,8 @@
           },
           {
             "letter": {
-              "letter": "I",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1524,8 +2041,8 @@
           },
           {
             "letter": {
-              "letter": "N",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -1568,8 +2085,8 @@
           },
           {
             "letter": {
-              "letter": "R",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -1590,8 +2107,8 @@
           },
           {
             "letter": {
-              "letter": "C",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1601,8 +2118,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1612,8 +2129,8 @@
           },
           {
             "letter": {
-              "letter": "RR",
-              "value": 8,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -1623,8 +2140,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1656,8 +2173,8 @@
           },
           {
             "letter": {
-              "letter": "T",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -1680,8 +2197,8 @@
         [
           {
             "letter": {
-              "letter": "T",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1691,8 +2208,8 @@
           },
           {
             "letter": {
-              "letter": "I",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1702,8 +2219,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1724,8 +2241,8 @@
           },
           {
             "letter": {
-              "letter": "R",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -1735,8 +2252,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1746,8 +2263,8 @@
           },
           {
             "letter": {
-              "letter": "M",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1757,8 +2274,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1812,8 +2329,8 @@
           },
           {
             "letter": {
-              "letter": "L",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1823,8 +2340,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1834,8 +2351,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1869,8 +2386,8 @@
           },
           {
             "letter": {
-              "letter": "S",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1902,7 +2419,7 @@
           },
           {
             "letter": {
-              "letter": "S",
+              "letter": "  ",
               "value": 0,
               "joker": false
             },
@@ -1924,8 +2441,8 @@
           },
           {
             "letter": {
-              "letter": "B",
-              "value": 4,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -1946,8 +2463,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -1979,8 +2496,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2001,8 +2518,8 @@
           },
           {
             "letter": {
-              "letter": "D",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -2025,8 +2542,8 @@
           },
           {
             "letter": {
-              "letter": "U",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2036,8 +2553,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -2069,8 +2586,8 @@
           },
           {
             "letter": {
-              "letter": "T",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2091,8 +2608,8 @@
           },
           {
             "letter": {
-              "letter": "R",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2102,8 +2619,8 @@
           },
           {
             "letter": {
-              "letter": "U",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[42m",
@@ -2113,8 +2630,8 @@
           },
           {
             "letter": {
-              "letter": "L",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2124,8 +2641,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2146,8 +2663,8 @@
           },
           {
             "letter": {
-              "letter": "H",
-              "value": 5,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -2168,8 +2685,8 @@
           },
           {
             "letter": {
-              "letter": "I",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2225,8 +2742,8 @@
           },
           {
             "letter": {
-              "letter": "Z",
-              "value": 10,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2236,8 +2753,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -2247,8 +2764,8 @@
           },
           {
             "letter": {
-              "letter": "T",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2258,8 +2775,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2280,8 +2797,8 @@
           },
           {
             "letter": {
-              "letter": "O",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[44m",
@@ -2302,8 +2819,8 @@
           },
           {
             "letter": {
-              "letter": "D",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2313,8 +2830,8 @@
           },
           {
             "letter": {
-              "letter": "U",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2324,8 +2841,8 @@
           },
           {
             "letter": {
-              "letter": "D",
-              "value": 3,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[43m",
@@ -2335,8 +2852,8 @@
           },
           {
             "letter": {
-              "letter": "A",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2414,8 +2931,8 @@
           },
           {
             "letter": {
-              "letter": "E",
-              "value": 1,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[0m",
@@ -2502,8 +3019,8 @@
           },
           {
             "letter": {
-              "letter": "N",
-              "value": 2,
+              "letter": "  ",
+              "value": 0,
               "joker": false
             },
             "color": "\u001b[41m",
@@ -2515,118 +3032,222 @@
       ]
     },
     "gamePlayer1": {
-      "alias": "asier",
-      "score": 37,
-      "holder": {
-        "hold": [
-          {
-            "letter": "LL",
-            "value": 8,
-            "joker": false
-          },
-          {
-            "letter": "E",
-            "value": 1,
-            "joker": false
-          },
-          {
-            "letter": "O",
-            "value": 1,
-            "joker": false
-          },
-          {
-            "letter": "A",
-            "value": 1,
-            "joker": false
-          },
-          {
-            "letter": "Z",
-            "value": 10,
-            "joker": false
-          },
-          {
-            "letter": "U",
-            "value": 1,
-            "joker": false
-          },
-          {
-            "letter": "T",
-            "value": 2,
-            "joker": false
-          }
-        ]
-      },
-      "winner": false
-    },
-    "gamePlayer2": {
       "alias": "ferchu",
-      "score": 13,
+      "score": 0,
       "holder": {
         "hold": [
           {
-            "letter": "A",
-            "value": 1,
+            "amount": 2,
+            "letter": "☻",
+            "value": 0,
             "joker": false
           },
           {
-            "letter": "I",
-            "value": 1,
-            "joker": false
-          },
-          {
-            "letter": "B",
-            "value": 4,
-            "joker": false
-          },
-          {
-            "letter": "G",
+            "amount": 2,
+            "letter": "M",
             "value": 3,
             "joker": false
           },
           {
-            "letter": "A",
-            "value": 1,
+            "amount": 1,
+            "letter": "Y",
+            "value": 5,
             "joker": false
           },
           {
+            "amount": 5,
             "letter": "R",
             "value": 2,
             "joker": false
           },
           {
-            "letter": "N",
-            "value": 2,
+            "amount": 9,
+            "letter": "O",
+            "value": 1,
+            "joker": false
+          },
+          {
+            "amount": 9,
+            "letter": "O",
+            "value": 1,
+            "joker": false
+          },
+          {
+            "amount": 6,
+            "letter": "I",
+            "value": 1,
             "joker": false
           }
         ]
       },
-      "winner": false
+      "winner": false,
+      "pass": false
+    },
+    "gamePlayer2": {
+      "alias": "asier",
+      "score": 0,
+      "holder": {
+        "hold": [
+          {
+            "amount": 2,
+            "letter": "☻",
+            "value": 0,
+            "joker": false
+          },
+          {
+            "amount": 6,
+            "letter": "S",
+            "value": 1,
+            "joker": false
+          },
+          {
+            "amount": 12,
+            "letter": "A",
+            "value": 1,
+            "joker": false
+          },
+          {
+            "amount": 1,
+            "letter": "LL",
+            "value": 8,
+            "joker": false
+          },
+          {
+            "amount": 12,
+            "letter": "E",
+            "value": 1,
+            "joker": false
+          },
+          {
+            "amount": 5,
+            "letter": "R",
+            "value": 2,
+            "joker": false
+          },
+          {
+            "amount": 12,
+            "letter": "A",
+            "value": 1,
+            "joker": false
+          }
+        ]
+      },
+      "winner": false,
+      "pass": false
     },
     "gameFinished": false,
     "gameOrder": {
       "players": [
         {
-          "alias": "asier",
-          "score": 257,
+          "alias": "ferchu",
+          "score": 0,
           "holder": {
-            "hold": []
+            "hold": [
+              {
+                "amount": 2,
+                "letter": "☻",
+                "value": 0,
+                "joker": false
+              },
+              {
+                "amount": 2,
+                "letter": "M",
+                "value": 3,
+                "joker": false
+              },
+              {
+                "amount": 1,
+                "letter": "Y",
+                "value": 5,
+                "joker": false
+              },
+              {
+                "amount": 5,
+                "letter": "R",
+                "value": 2,
+                "joker": false
+              },
+              {
+                "amount": 9,
+                "letter": "O",
+                "value": 1,
+                "joker": false
+              },
+              {
+                "amount": 9,
+                "letter": "O",
+                "value": 1,
+                "joker": false
+              },
+              {
+                "amount": 6,
+                "letter": "I",
+                "value": 1,
+                "joker": false
+              }
+            ]
           },
-          "winner": false
+          "winner": false,
+          "pass": false
         },
         {
-          "alias": "ferchu",
-          "score": 189,
+          "alias": "asier",
+          "score": 0,
           "holder": {
-            "hold": []
+            "hold": [
+              {
+                "amount": 2,
+                "letter": "☻",
+                "value": 0,
+                "joker": false
+              },
+              {
+                "amount": 6,
+                "letter": "S",
+                "value": 1,
+                "joker": false
+              },
+              {
+                "amount": 12,
+                "letter": "A",
+                "value": 1,
+                "joker": false
+              },
+              {
+                "amount": 1,
+                "letter": "LL",
+                "value": 8,
+                "joker": false
+              },
+              {
+                "amount": 12,
+                "letter": "E",
+                "value": 1,
+                "joker": false
+              },
+              {
+                "amount": 5,
+                "letter": "R",
+                "value": 2,
+                "joker": false
+              },
+              {
+                "amount": 12,
+                "letter": "A",
+                "value": 1,
+                "joker": false
+              }
+            ]
           },
-          "winner": false
+          "winner": false,
+          "pass": false
         }
       ]
     },
     "gameTimePlayed": {
       "hours": 0,
-      "minutes": 57,
-      "seconds": 175
+      "minutes": 0,
+      "seconds": 8
     }
   }
 ]

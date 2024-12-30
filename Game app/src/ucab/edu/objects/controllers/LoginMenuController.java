@@ -1,19 +1,18 @@
 package ucab.edu.objects.controllers;
 
-import ucab.edu.objects.jsonHandlers.JsonUserHandler;
-import ucab.edu.objects.models.MenuModel;
+import ucab.edu.objects.models.LoginMenuModel;
 import ucab.edu.objects.users.User;
-import ucab.edu.objects.views.MenuView;
+import ucab.edu.objects.views.LoginMenuView;
 
 import java.util.LinkedList;
 
-public class MenuController {
-    private MenuModel model;
-    private MenuView view;
+public class LoginMenuController {
+    private LoginMenuModel model;
+    private LoginMenuView view;
 
-    public MenuController() {
-        this.model = new MenuModel();
-        this.view = new MenuView();
+    public LoginMenuController() {
+        this.model = new LoginMenuModel();
+        this.view = new LoginMenuView();
     }
 
     public LinkedList<User> usersLogIn(LinkedList<User> usersLinkedList) {

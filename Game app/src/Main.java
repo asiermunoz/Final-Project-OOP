@@ -1,10 +1,9 @@
 import ucab.edu.objects.*;
-import ucab.edu.objects.controllers.MenuController;
+import ucab.edu.objects.controllers.LoginMenuController;
+import ucab.edu.objects.controllers.PreGameMenuController;
 import ucab.edu.objects.jsonHandlers.*;
-import ucab.edu.objects.users.Email;
+import ucab.edu.objects.models.PreGameMenuModel;
 import ucab.edu.objects.users.User;
-import ucab.edu.objects.users.exceptions.InvalidAliasException;
-import ucab.edu.objects.users.exceptions.InvalidEmailException;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -13,7 +12,7 @@ import java.util.*;
 import static ucab.edu.objects.Color.*;
 
 public class Main {
-    private static final int initialLettersNeeded = 7;
+    /*private static final int initialLettersNeeded = 7;
     private static final Scanner read = new Scanner(System.in);
 
     public static Rotation setWriter(int opc, Board board){
@@ -328,7 +327,7 @@ public class Main {
         }
         Thread.sleep(2000);
         return gameInformation;
-    }
+    }*/
 
 
     //MAIN
@@ -336,32 +335,22 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
 
         //Variables de lectura de archivos
-        boolean gameAlreadyCreated = false;
         LinkedList<User> usersLinkedList = new LinkedList<User>();
         LinkedList<GameInformation> gamesInProgress = new LinkedList<GameInformation>();
         LinkedList<GameInformation> finishedGames = new LinkedList<GameInformation>();
-        int overwriteGameOption;
-        Scanner readOverwriteGameOption = new Scanner(System.in);
-        GameInformation foundedGame = null;
 
         //Checker del web scraping
         WordChecker checker = new WordChecker();
         boolean existance;
 
         //Variables del juego
-        Board board;
-        TimePlayed generatedTimePlayed;
-        Bag bag;
-        Order order = new Order();
         User user1 = null, user2 = null;
-        int option;
-        GameInformation gamePlayed;
-        Player player1;
-        Player player2;
+
 
         //Variables MVC
-        MenuController menuController = new MenuController();
+        LoginMenuController loginMenuController = new LoginMenuController();
         LinkedList<User> usersLogged;
+        PreGameMenuController preGameMenuController = new PreGameMenuController();
 
         //Json Reading
         usersLinkedList = JsonUserHandler.readFromJson();
@@ -378,156 +367,13 @@ public class Main {
         }
 
 
-        usersLogged = menuController.usersLogIn(usersLinkedList);
+        usersLogged = loginMenuController.usersLogIn(usersLinkedList);
         user1 = usersLogged.get(0);
         user2 = usersLogged.get(1);
 
         System.out.println(ANSI_GREEN+"\nBienvenidos " + user1.getAlias() + " y " + user2.getAlias() + ANSI_RESET);
         Thread.sleep(2000);
 
-        try {
-            if (gamesInProgress == null) {
-                throw new NoGamesInProgressException();
-            }
-            //Buscar partida en base al jugador 1
-            for (int i = 0; i < gamesInProgress.size(); i++) {
-                if (user1.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
-
-                    //Si se encuentra al jugador 1 se busca al jugador 2
-                    for (int j = 0; j < gamesInProgress.size(); j++) {
-                        if (user2.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
-                            System.out.println("Partida encontrada");
-                            gameAlreadyCreated = true;
-                            foundedGame = gamesInProgress.get(i);
-                            break;
-                        }
-                    }
-
-                    //Si no se encuentra se busca el user pero como jugador 2
-                } else if (user1.equalsName(gamesInProgress.get(i).getPlayer2Alias())) {
-
-                    //Si se encuentra se busca al jugador 2
-                    for (int j = 0; j < gamesInProgress.size(); j++) {
-                        if (user2.equalsName(gamesInProgress.get(i).getPlayer1Alias())) {
-                            System.out.println("Partida encontrada");
-                            gameAlreadyCreated = true;
-                            foundedGame = gamesInProgress.get(i);
-                            break;
-                        }
-                    }
-
-                    //No se consiguio ninguno
-                } else {
-                    System.out.println("No se ha encontrado ninguna partida");
-                }
-
-            }
-        }catch(NoGamesInProgressException e){
-            System.out.println(e.getMessage());
-            Thread.sleep(1500);
-        }
-
-        do{
-            option = menu();
-            switch(option){
-                case 1:
-                    //Revisa si existe una partida
-                    if(gameAlreadyCreated) {
-                        System.out.println("Ya existe una partida creada para estos jugadores, quiere sobreescribir la partida?");
-                        System.out.println("1. Si");
-                        System.out.println("2. No");
-
-                        overwriteGameOption = readOverwriteGameOption.nextInt();
-                        switch (overwriteGameOption) {
-                            case 1:
-                                System.out.println("Partida sobreescrita");
-                                gamesInProgress.remove(foundedGame);
-                                if(gamesInProgress.isEmpty()) {
-                                    JsonGamesHandler.clearJsonFile();
-                                } else {
-                                    JsonGamesHandler.writeToJson(gamesInProgress);
-                                }
-                                break;
-                            case 2:
-                                continue;
-                            default:
-                                System.out.println(ANSI_RED + "El número ingresado no posee acción alguna\n");
-                                Thread.sleep(500);
-                                break;
-                        }
-
-
-                    }
-                    //New game
-                    System.out.println("Iniciando nuevo juego: ");
-                    Thread.sleep(1000);
-                    bag = new Bag();
-                    player1 = new Player(user1.getAlias(), 0, bag.fillNewHolder(initialLettersNeeded), false);
-                    player2 = new Player(user2.getAlias(),0, bag.fillNewHolder(initialLettersNeeded), false);
-                    board = new Board();
-                    generatedTimePlayed = new TimePlayed(0,0,0);
-
-
-                    //Establecer orden de jugadores
-                    order.setNewOrder(player1,player2);
-                    gamePlayed = playGame(order.getFirstPlayer(), order.getLastPlayer(), order, board, bag, generatedTimePlayed);
-                    if(!gamePlayed.isGameFinished()) {
-                        gamesInProgress.add(gamePlayed);
-                        JsonGamesHandler.writeToJson(gamesInProgress);
-                    } else {
-                        finishedGames.add(gamePlayed);
-                        JsonFinishedGamesHandler.writeToJson(gamesInProgress);
-                    }
-                    break;
-                case 2:
-                    //Revisa si existe una partida
-                    if(!gameAlreadyCreated) {
-                        System.out.println("No existen partidas creadas con estos jugadores, inicie un nuevo juego.");
-                        continue;
-                    }
-                    assert foundedGame != null;
-                    player1 = foundedGame.getGamePlayer1();
-                    player2 = foundedGame.getGamePlayer2();
-                    order = foundedGame.getGameOrder();
-                    board = foundedGame.getGameBoard();
-                    bag = foundedGame.getGameBag();
-                    generatedTimePlayed = foundedGame.getGameTimePlayed();
-                    gamesInProgress.remove(foundedGame);
-
-                    gamePlayed = playGame(order.getFirstPlayer(), order.getLastPlayer(), order, board, bag, generatedTimePlayed);
-                    if(!gamePlayed.isGameFinished()) {
-                        gamesInProgress.add(gamePlayed);
-                        JsonGamesHandler.writeToJson(gamesInProgress);
-                    } else {
-                        finishedGames.add(gamePlayed);
-                        JsonFinishedGamesHandler.writeToJson(gamesInProgress);
-                    }
-
-                    break;
-                case 3:
-                    if(!gameAlreadyCreated) {
-                        System.out.println("No existen partidas creadas con estos jugadores, por lo tanto no hay estadisticas de ellos, inicie un nuevo juego.");
-                        continue;
-                    }
-                    System.out.println("Referencia:");
-                    System.out.println("Nombre, Score, gano?");
-                    System.out.println("Jugador 1");
-                    System.out.println(foundedGame.getPlayer1Alias()+", "+foundedGame.getGamePlayer1().getScore()+", "+foundedGame.getGamePlayer1().isWinner());
-                    System.out.println("Jugador 2");
-                    System.out.println(foundedGame.getPlayer2Alias()+", "+foundedGame.getGamePlayer2().getScore()+", "+foundedGame.getGamePlayer2().isWinner());
-                    System.out.println("Tiempo total jugado: ");
-                    foundedGame.getGameTimePlayed().printTime();
-                    break;
-                case 0:
-                    System.out.println(ANSI_BLUE + "Saliendo del juego...");
-                    Thread.sleep(800); //Pausa la corrida de código por los milisegundos establecidos.
-                    System.out.println(ANSI_YELLOW + "Vuelva pronto!");
-                    break;
-                default:
-                    System.out.println(ANSI_RED + "El número ingresado no posee acción alguna\n");
-                    Thread.sleep(500); //Pausa la corrida de código por los milisegundos establecidos.
-                    break;
-            }
-        }while(option != 0);
+        preGameMenuController.start(gamesInProgress, user1, user2, finishedGames);
     }
 }

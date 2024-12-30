@@ -4,7 +4,7 @@ import ucab.edu.objects.users.User;
 
 import java.util.LinkedList;
 
-public class MenuModel {
+public class LoginMenuModel {
 
     public boolean validateUser(LinkedList<User> usersLinkedList, User newUser) {
         for (User user : usersLinkedList) {
